@@ -1,5 +1,11 @@
 ﻿<ProjectConfiguration>
   <Settings>
+    <AdditionalFilesToIncludeForProject>
+      <Value>Input\**.*</Value>
+    </AdditionalFilesToIncludeForProject>
+    <CopyReferencedAssembliesToWorkspace>True</CopyReferencedAssembliesToWorkspace>
     <HiddenComponentWarnings />
+    <RunPostBuildEvents>True</RunPostBuildEvents>
+    <RunPreBuildEvents>True</RunPreBuildEvents>
   </Settings>
 </ProjectConfiguration>

@@ -31,4 +31,10 @@
 		</Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Input\Day1\Example.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
