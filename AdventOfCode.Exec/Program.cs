@@ -1,11 +1,12 @@
-﻿using AdventOfCode.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using AdventOfCode.Common;
 using AdventOfCode.Day1;
 
 namespace AdventOfCode.Exec
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Solve<Day1Solution>();
         }

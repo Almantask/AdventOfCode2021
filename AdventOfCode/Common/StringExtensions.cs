@@ -1,9 +1,11 @@
-﻿namespace AdventOfCode.Common
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace AdventOfCode.Common
 {
     public static class StringExtensions
     {
-        public static string[] SplitByBlankLine(this string text)
-            => text.Split($"{Environment.NewLine}{Environment.NewLine}");
+        //public static string[] SplitByBlankLine(this string text)
+        //    => text.Split($"{Environment.NewLine}{Environment.NewLine}");
 
         public static long[] ToNumbersSplitByEndOfLine(this string text)
         {
