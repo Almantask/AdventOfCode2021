@@ -12,7 +12,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Day1\" />
+	  <None Update="Day1\Input.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

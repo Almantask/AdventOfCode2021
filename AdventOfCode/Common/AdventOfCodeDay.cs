@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
-
-namespace AdventOfCode.Common
+﻿namespace AdventOfCode.Common
 {
-    // Other days don't use this, because I figured it out in Day8.
     public abstract class AdventOfCodeDay<TPart1, TPart2> : IDaySolution
         where TPart1 : class, IPartSolution, new()
         where TPart2 : class, IPartSolution, new()

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AdventOfCode.Day1
+﻿namespace AdventOfCode.Day1
 {
     public static class DepthAnalyzer
     {
