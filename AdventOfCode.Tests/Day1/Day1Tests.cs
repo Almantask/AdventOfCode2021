@@ -1,7 +1,6 @@
 ﻿using AdventOfCode.Day1;
 using FluentAssertions;
 using Xunit;
-using static AdventOfCode.Tests.Common.ExpectationMaker;
 
 namespace AdventOfCode.Tests.Day1
 {
@@ -10,7 +9,7 @@ namespace AdventOfCode.Tests.Day1
         private const int Day = 1;
 
         [Theory]
-        [MemberData(nameof(Part1ExpectedMeasureIncreases))]
+        [MemberData(nameof(Day1ExpectedMeasureIncreases))]
         public void Part1_Solve_ReturnsIncreasesCount(string measures, long expectedMeasureIncreases)
         {
             var part1 = new Part1();
@@ -21,25 +20,17 @@ namespace AdventOfCode.Tests.Day1
         }
 
         [Theory]
-        [MemberData(nameof(Part2ExpectedMeasureIncreases))]
+        [MemberData(nameof(Day1ExpectedMeasureIncreases))]
         public void Part2_Solve_WhenExampleMeasurements_ReturnsExampleIncreasesCount(string input, long expectedMeasureIncreases)
         {
 
         }
 
-        public static IEnumerable<object[]> Part1ExpectedMeasureIncreases
+        public static IEnumerable<object[]> Day1ExpectedMeasureIncreases
         {
             get
             {
-                yield return Expect(Day, "Example", 7);
-            }
-        }
-
-        public static IEnumerable<object[]> Part2ExpectedMeasureIncreases
-        {
-            get
-            {
-                yield return Expect(Day, "Example", 7);
+                yield return Expect(day: 1, file: "Example", result: 7);
             }
         }
     }
