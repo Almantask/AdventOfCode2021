@@ -22,7 +22,10 @@ namespace AdventOfCode.Day1
     {
         public long Solve(string input)
         {
-            return 0;
+            var measures = input.ToNumbersSplitByEndOfLine();
+            var increasesCount = DepthAnalyzer.Count3WindowIncreases(measures);
+
+            return increasesCount;
         }
     }
 }

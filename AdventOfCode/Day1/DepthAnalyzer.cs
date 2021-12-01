@@ -17,5 +17,23 @@
 
             return increases;
         }
+
+        public static long Count3WindowIncreases(long[] depthMeasurements)
+        {
+            var increases = 0;
+            var indexOfLastSummableMeasure = depthMeasurements.Length - 3;
+            for (var i = 1; i <= indexOfLastSummableMeasure; i++)
+            {
+                var overlap = depthMeasurements[i] + depthMeasurements[i + 1];
+                var previousWindowSum = overlap + depthMeasurements[i - 1];
+                var currentWindowSum = overlap + depthMeasurements[i + 2];
+                if (currentWindowSum > previousWindowSum)
+                {
+                    increases++;
+                }
+            }
+
+            return increases;
+        }
     }
 }
