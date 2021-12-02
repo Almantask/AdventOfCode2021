@@ -6,7 +6,7 @@ namespace AdventOfCode.Tests.Day1
     {
         [Theory]
         [MemberData(nameof(Day1Part1ExpectedMeasureIncreases))]
-        public void Part1_Solve_(string measures, long expectedMeasureIncreases)
+        public void Part1_Solve_ReturnsIncreasesCount(string measures, long expectedMeasureIncreases)
         {
             var part1 = new Part1();
 
@@ -17,7 +17,7 @@ namespace AdventOfCode.Tests.Day1
 
         [Theory]
         [MemberData(nameof(Day1Part2ExpectedMeasureIncreases))]
-        public void Part2_Solve_WhenExampleMeasurements_ReturnsExampleIncreasesCount(string input, long expectedMeasureIncreases)
+        public void Part2_Solve_ReturnsIncreasesCountOverAWindowOf3(string input, long expectedMeasureIncreases)
         {
             var part2 = new Part2();
 
