@@ -19,11 +19,11 @@ namespace AdventOfCode.Tests.Day2
 
         [Theory]
         [MemberData(nameof(Day1Part2ExpectedDestinations))]
-        public void Part2_Solve_WhenExampleMeasurements_ReturnsExampleIncreasesCount(string input, long expectedMeasureDestination)
+        public void Part2_Solve_Returns_DepthMultipliedByHorizon(string input, long expectedMeasureDestination)
         {
-            var part1 = new Part2();
+            var part2 = new Part2();
 
-            var destination = part1.Solve(input);
+            var destination = part2.Solve(input);
 
             destination.Should().Be(expectedMeasureDestination);
         }
@@ -40,7 +40,7 @@ namespace AdventOfCode.Tests.Day2
         {
             get
             {
-                yield return Expect(day: 2, file: "Example", result: 0);
+                yield return Expect(day: 2, file: "Example", result: 900);
             }
         }
     }

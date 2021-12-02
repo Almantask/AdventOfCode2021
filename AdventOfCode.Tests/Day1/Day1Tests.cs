@@ -21,9 +21,9 @@ namespace AdventOfCode.Tests.Day1
         [MemberData(nameof(Day1Part2ExpectedMeasureIncreases))]
         public void Part2_Solve_WhenExampleMeasurements_ReturnsExampleIncreasesCount(string input, long expectedMeasureIncreases)
         {
-            var part1 = new Part2();
+            var part2 = new Part2();
 
-            var measureIncreases = part1.Solve(input);
+            var measureIncreases = part2.Solve(input);
 
             measureIncreases.Should().Be(expectedMeasureIncreases);
         }

@@ -26,21 +26,6 @@ namespace AdventOfCode.Tests.Day2
         }
 
         [Fact]
-        public void Forward_Increases_Horizontal_And_DepthMultipliedByAim()
-        {
-            // Arrange
-            const int aim = 2;
-            _controlsV2.Down(aim);
-
-            // Act
-            _controlsV2.Forward(3);
-
-            // Assert
-            _controlsV2.Horizon.Should().Be(3);
-            _controlsV2.Depth.Should().Be(6);
-        }
-
-        [Fact]
         public void Down_IncreasesAim()
         {
             _controlsV2.Down(1);
@@ -69,6 +54,22 @@ namespace AdventOfCode.Tests.Day2
                 _controlsV2.Depth.Should().Be(0);
                 _controlsV2.Horizon.Should().Be(2);
             }
+        }
+
+        [Fact]
+        public void Forward_Increases_Horizontal_And_DepthMultipliedByAim()
+        {
+            // Arrange
+            const int aim = 2;
+            const int forward = 3;
+            _controlsV2.Down(aim);
+
+            // Act
+            _controlsV2.Forward(forward);
+
+            // Assert
+            _controlsV2.Horizon.Should().Be(forward);
+            _controlsV2.Depth.Should().Be(aim * forward);
         }
     }
 }
