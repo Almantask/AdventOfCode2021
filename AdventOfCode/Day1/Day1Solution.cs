@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Day1
 {
-    public class Day1Solution : AdventOfCodeDay<Part1, Part2>
+    public class Solution : AdventOfCodeDay<Part1, Part2>
     {
         protected override int Day => 1;
     }

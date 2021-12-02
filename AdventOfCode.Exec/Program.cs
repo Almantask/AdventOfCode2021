@@ -8,7 +8,7 @@ namespace AdventOfCode.Exec
     {
         public static void Main(string[] args)
         {
-            Solve<Day1Solution>();
+            Solve<Day1.Solution>();
         }
 
         private static void Solve<TAdventOfCodeDay>() where TAdventOfCodeDay : IDaySolution, new()
