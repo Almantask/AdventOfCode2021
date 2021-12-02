@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Tests.Day2
 {
-    public class Day2Tests
+    public class Day3Tests
     {
         [Theory]
         [MemberData(nameof(Day1Part1ExpectedDestinations))]
