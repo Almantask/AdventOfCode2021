@@ -11,7 +11,7 @@ namespace AdventOfCode.Day2
     {
         public long Solve(string input)
         {
-            var pilot = new SubmarinePilot(new SubmarineControls());
+            var pilot = new SubmarinePilot(new SubmarineControlsV1());
             var instructions = input.SplitByEndOfLine();
             foreach (var instruction in instructions)
             {

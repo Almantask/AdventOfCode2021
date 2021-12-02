@@ -1,38 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AdventOfCode.Day2;
-using FluentAssertions;
-using FluentAssertions.Execution;
+using Moq;
 using Xunit;
 
 namespace AdventOfCode.Tests.Day2
 {
     public class SubmarinePilotTests
     {
-        public SubmarinePilot _pilot;
+        public readonly SubmarinePilot _pilot;
+
+        private readonly Mock<ISubmarineControls> _controls;
 
         public SubmarinePilotTests()
         {
-            var controls = new SubmarineControls();
-            _pilot = new SubmarinePilot(controls);
+            _controls = new Mock<ISubmarineControls>();
+            _pilot = new SubmarinePilot(_controls.Object);
         }
 
-        [Theory]
-        [InlineData("forward 1", 1, 0)]
-        [InlineData("up 1", 0, -1)]
-        [InlineData("down 1", 0, 1)]
-        public void Move_MovesExpectedPart(string instruction, int expectedHorizon, int expectedDepth)
+        [Fact]
+        public void Move_WhenForward_MovesForward()
         {
-            _pilot.Move(instruction);
+            _pilot.Move("forward 1");
 
-            using (new AssertionScope())
-            {
-                _pilot.Depth.Should().Be(expectedDepth);
-                _pilot.Horizon.Should().Be(expectedHorizon);
-            }
+            _controls.Verify(c => c.Forward(1));
+        }
+
+        [Fact]
+        public void Move_WhenDown_MovesDown()
+        {
+            _pilot.Move("down 1");
+
+            _controls.Verify(c => c.Down(1));
+        }
+
+        [Fact]
+        public void Move_WhenUp_MovesUp()
+        {
+            _pilot.Move("up 1");
+
+            _controls.Verify(c => c.Up(1));
         }
     }
 }

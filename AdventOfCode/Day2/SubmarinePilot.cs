@@ -2,21 +2,21 @@
 {
     public class SubmarinePilot
     {
-        public int Depth => _controls.Depth;
-        public int Horizon => _controls.Horizon;
+        public int Depth => _controlsV1.Depth;
+        public int Horizon => _controlsV1.Horizon;
 
         private readonly Dictionary<SubmarineMove.Direction, Action<int>> _movements;
 
-        private readonly SubmarineControls _controls;
+        private readonly ISubmarineControls _controlsV1;
 
-        public SubmarinePilot(SubmarineControls controls)
+        public SubmarinePilot(ISubmarineControls controlsV1)
         {
-            _controls = controls;
+            _controlsV1 = controlsV1;
             _movements = new()
             {
-                { SubmarineMove.Direction.Down, (amount) => _controls.Down(amount) },
-                { SubmarineMove.Direction.Up, (amount) => _controls.Up(amount) },
-                { SubmarineMove.Direction.Forward, (amount) => _controls.Forward(amount) }
+                { SubmarineMove.Direction.Down, (amount) => _controlsV1.Down(amount) },
+                { SubmarineMove.Direction.Up, (amount) => _controlsV1.Up(amount) },
+                { SubmarineMove.Direction.Forward, (amount) => _controlsV1.Forward(amount) }
             };
         }
 
