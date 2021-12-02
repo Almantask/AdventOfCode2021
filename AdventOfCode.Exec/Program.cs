@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using AdventOfCode.Common;
-using AdventOfCode.Day1;
+﻿using AdventOfCode.Common;
 
 namespace AdventOfCode.Exec
 {

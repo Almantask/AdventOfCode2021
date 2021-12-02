@@ -1,8 +1,5 @@
-﻿using AdventOfCode.Day1;
-using AdventOfCode.Day2;
-using FluentAssertions;
+﻿using AdventOfCode.Day2;
 using FluentAssertions.Execution;
-using Xunit;
 
 namespace AdventOfCode.Tests.Day2
 {

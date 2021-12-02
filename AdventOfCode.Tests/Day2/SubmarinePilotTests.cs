@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using AdventOfCode.Day2;
+﻿using AdventOfCode.Day2;
 using Moq;
-using Xunit;
 
 namespace AdventOfCode.Tests.Day2
 {

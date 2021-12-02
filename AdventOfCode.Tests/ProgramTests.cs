@@ -1,6 +1,4 @@
 ﻿using AdventOfCode.Exec;
-using FluentAssertions;
-using Xunit;
 
 namespace AdventOfCode.Tests
 {
@@ -9,7 +7,7 @@ namespace AdventOfCode.Tests
         [Fact]
         public void Main_DoesNotThrow()
         {
-            var main = () => Program.Main(null);
+            var main = () => Program.Main(Array.Empty<string>());
 
             main.Should().NotThrow();
         }

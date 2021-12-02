@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace AdventOfCode.Common
+﻿namespace AdventOfCode.Common
 {
     public static class StringExtensions
     {
