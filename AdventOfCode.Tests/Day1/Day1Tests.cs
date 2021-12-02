@@ -6,11 +6,9 @@ namespace AdventOfCode.Tests.Day1
 {
     public class Day1Tests
     {
-        private const int Day = 1;
-
         [Theory]
-        [MemberData(nameof(Day1ExpectedMeasureIncreases))]
-        public void Part1_Solve_ReturnsIncreasesCount(string measures, long expectedMeasureIncreases)
+        [MemberData(nameof(Day1Part1ExpectedMeasureIncreases))]
+        public void Part1_Solve_(string measures, long expectedMeasureIncreases)
         {
             var part1 = new Part1();
 
@@ -20,17 +18,29 @@ namespace AdventOfCode.Tests.Day1
         }
 
         [Theory]
-        [MemberData(nameof(Day1ExpectedMeasureIncreases))]
+        [MemberData(nameof(Day1Part2ExpectedMeasureIncreases))]
         public void Part2_Solve_WhenExampleMeasurements_ReturnsExampleIncreasesCount(string input, long expectedMeasureIncreases)
         {
+            var part1 = new Part2();
 
+            var measureIncreases = part1.Solve(input);
+
+            measureIncreases.Should().Be(expectedMeasureIncreases);
         }
 
-        public static IEnumerable<object[]> Day1ExpectedMeasureIncreases
+        public static IEnumerable<object[]> Day1Part1ExpectedMeasureIncreases
         {
             get
             {
                 yield return Expect(day: 1, file: "Example", result: 7);
+            }
+        }
+
+        public static IEnumerable<object[]> Day1Part2ExpectedMeasureIncreases
+        {
+            get
+            {
+                yield return Expect(day: 1, file: "Example", result: 5);
             }
         }
     }
