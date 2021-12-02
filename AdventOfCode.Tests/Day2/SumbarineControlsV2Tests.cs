@@ -3,11 +3,11 @@ using FluentAssertions.Execution;
 
 namespace AdventOfCode.Tests.Day2
 {
-    public class SumbarineControlsV2Tests
+    public class SubmarineControlsV2Tests
     {
         private readonly SubmarineControlsV2 _controlsV2;
 
-        public SumbarineControlsV2Tests()
+        public SubmarineControlsV2Tests()
         {
             _controlsV2 = new SubmarineControlsV2();
         }
