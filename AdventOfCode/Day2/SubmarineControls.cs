@@ -14,7 +14,6 @@ public class SubmarineControlsV1 : ISubmarineControls
 {
     public int Depth { get; private set; }
     public int Horizon { get; private set; }
-    public int Aim { get; set; }
 
     public void Forward(int amount)
     {
