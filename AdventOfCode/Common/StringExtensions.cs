@@ -5,9 +5,6 @@
         public static string[] SplitByEndOfLine(this string text)
             => text.Split($"{Environment.NewLine}");
 
-        //public static string[] SplitByBlankLine(this string text)
-        //    => text.Split($"{Environment.NewLine}{Environment.NewLine}");
-
         public static long[] ToNumbersSplitByEndOfLine(this string text)
         {
             var numbers = text

@@ -5,7 +5,7 @@ namespace AdventOfCode.Tests.Day2
 {
     public class SubmarinePilotTests
     {
-        public readonly SubmarinePilot _pilot;
+        private readonly SubmarinePilot _pilot;
 
         private readonly Mock<ISubmarineControls> _controls;
 
