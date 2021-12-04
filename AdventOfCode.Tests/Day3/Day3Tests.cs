@@ -5,7 +5,7 @@ namespace AdventOfCode.Tests.Day3
     public class Day3Tests
     {
         [Theory]
-        [MemberData(nameof(Day1Part1))]
+        [MemberData(nameof(Part1))]
         public void Part1_Solve_Returns(string measures, long expected)
         {
             var part1 = new Part1();
@@ -16,7 +16,7 @@ namespace AdventOfCode.Tests.Day3
         }
 
         [Theory]
-        [MemberData(nameof(Day1Part2))]
+        [MemberData(nameof(Part2))]
         public void Part2_Solve_Returns(string input, long expected)
         {
             var part2 = new Part2();
@@ -26,15 +26,15 @@ namespace AdventOfCode.Tests.Day3
             destination.Should().Be(expected);
         }
 
-        public static IEnumerable<object[]> Day1Part1
+        public static IEnumerable<object[]> Part1
         {
             get
             {
-                yield return Expect(day: 3, file: "Example", result: 0);
+                yield return Expect(day: 3, file: "Example", result: 198);
             }
         }
 
-        public static IEnumerable<object[]> Day1Part2
+        public static IEnumerable<object[]> Part2
         {
             get
             {

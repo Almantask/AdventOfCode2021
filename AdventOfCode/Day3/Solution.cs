@@ -11,7 +11,14 @@ namespace AdventOfCode.Day3
     {
         public long Solve(string input)
         {
-            return 0;
+            var binaryNumbers = input
+                .SplitByEndOfLine()
+                .Select(binary => binary.ToCharArray())
+                .ToArray()
+                .To2D();
+
+            var diagnosticReport = new DiagnosticReport(binaryNumbers);
+            return diagnosticReport.PowerConsumption;
         }
     }
 

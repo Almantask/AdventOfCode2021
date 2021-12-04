@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Tests.Common
+﻿namespace AdventOfCode.Tests.TestingUtils
 {
     public static class ExpectationMaker
     {
