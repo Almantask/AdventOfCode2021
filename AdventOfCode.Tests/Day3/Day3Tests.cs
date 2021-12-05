@@ -6,24 +6,24 @@ namespace AdventOfCode.Tests.Day3
     {
         [Theory]
         [MemberData(nameof(Part1))]
-        public void Part1_Solve_Returns(string measures, long expected)
+        public void Part1_Solve_ReturnsPowerConsumptionRate(string measures, long expectedPowerConsumptionRate)
         {
             var part1 = new Part1();
 
-            var destination = part1.Solve(measures);
+            var powerConsumptionRate = part1.Solve(measures);
 
-            destination.Should().Be(expected);
+            powerConsumptionRate.Should().Be(expectedPowerConsumptionRate);
         }
 
         [Theory]
         [MemberData(nameof(Part2))]
-        public void Part2_Solve_Returns(string input, long expected)
+        public void Part2_Solve_ReturnsLifeSupportRate(string input, long expectedLifeSupportRate)
         {
             var part2 = new Part2();
 
-            var destination = part2.Solve(input);
+            var lifeSupportRate = part2.Solve(input);
 
-            destination.Should().Be(expected);
+            lifeSupportRate.Should().Be(expectedLifeSupportRate);
         }
 
         public static IEnumerable<object[]> Part1
