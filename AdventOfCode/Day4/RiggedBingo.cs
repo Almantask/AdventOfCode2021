@@ -6,6 +6,10 @@ public class RiggedBingo : Bingo
     {
     }
 
+    /// <summary>
+    /// Gets the last winners score.
+    /// </summary>
+    /// <returns></returns>
     public override long? GetWinnersScore()
     {
         var lastWinner = Tables.MaxBy(t => t.DrawnNumbersCount);
