@@ -11,12 +11,7 @@ namespace AdventOfCode.Day3
     {
         public long Solve(string input)
         {
-            var binaryNumbers = input
-                .SplitByEndOfLine()
-                .Select(binary => binary.ToCharArray())
-                .ToArray()
-                .To2D();
-
+            var binaryNumbers = PartInputTransformer.TransformTo2dArray(input);
             var diagnosticReport = new DiagnosticReport(binaryNumbers);
             return diagnosticReport.PowerConsumption;
         }
@@ -26,14 +21,23 @@ namespace AdventOfCode.Day3
     {
         public long Solve(string input)
         {
+            var binaryNumbers = PartInputTransformer.TransformTo2dArray(input);
+            var diagnosticReport = new DiagnosticReportV2(binaryNumbers);
+            return diagnosticReport.LifeSupportRating;
+        }
+    }
+
+    internal static class PartInputTransformer
+    {
+        public static char[,] TransformTo2dArray(string input)
+        {
             var binaryNumbers = input
                 .SplitByEndOfLine()
                 .Select(binary => binary.ToCharArray())
                 .ToArray()
                 .To2D();
 
-            var diagnosticReport = new DiagnosticReportV2(binaryNumbers);
-            return diagnosticReport.LifeSupportRating;
+            return binaryNumbers;
         }
     }
 }
