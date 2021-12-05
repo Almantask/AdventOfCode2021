@@ -2,7 +2,7 @@
 {
     public static class CharArrayExtensions
     {
-        public static long BinaryToLong(this char[] binaryNumber)
+        public static long ToLong(this char[] binaryNumber)
         {
             double converted = 0;
             double rank = binaryNumber.Length;

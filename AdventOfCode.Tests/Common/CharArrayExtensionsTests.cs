@@ -15,7 +15,7 @@ namespace AdventOfCode.Tests.Common
         [InlineData(new[] {'1', '0', '0','1'}, 9)]
         public void ToLong_ReturnsExpectedLongAsDecimal(char[] binary, long expected)
         {
-            var number = binary.BinaryToLong();
+            var number = binary.ToLong();
 
             number.Should().Be(expected);
         }
@@ -25,7 +25,7 @@ namespace AdventOfCode.Tests.Common
         {
             char[] not0Or1 = new []{'0', '1', 'a'};
 
-            var binaryToLongWhenNot0or1 = () => not0Or1.BinaryToLong();
+            var binaryToLongWhenNot0or1 = () => not0Or1.ToLong();
 
             binaryToLongWhenNot0or1
                 .Should().Throw<ArgumentException>()
