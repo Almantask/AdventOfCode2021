@@ -1,37 +1,40 @@
-﻿namespace AdventOfCode.Day4;
+﻿using AdventOfCode.Common;
+
+namespace AdventOfCode.Day4;
 
 public class Table
 {
-    public long Score
+    public long CalculateScore()
     {
-        get
-        {
-            var totalScore = 0;
+        var totalScore = 0;
 
-            for (var vertical = 0; vertical < _board.GetLength(0); vertical++)
+        for (var vertical = 0; vertical < _board.GetLength(0); vertical++)
+        {
+            for (var horizontal = 0; horizontal < _board.GetLength(1); horizontal++)
             {
-                for (var horizontal = 0; horizontal < _board.GetLength(1); horizontal++)
+                var isMarked = _markedNumbers[vertical, horizontal];
+                if (!isMarked)
                 {
-                    var isMarked = _markedNumbers[vertical, horizontal];
-                    if (!isMarked)
-                    {
-                        totalScore += _board[vertical, horizontal];
-                    }
+                    totalScore += _board[vertical, horizontal];
                 }
             }
-
-            var winningNumber = _drawnNumbers.LastOrDefault();
-            totalScore *= winningNumber;
-
-            return totalScore;
         }
+
+        var winningNumber = _drawnNumbers.LastOrDefault();
+        totalScore *= winningNumber;
+
+        return totalScore;
     }
+
+    public int DrawnNumbersCount => _drawnNumbers.Count;
 
     private readonly byte[,] _board;
 
     private readonly bool[,] _markedNumbers;
 
     private readonly IList<byte> _drawnNumbers;
+
+    private bool _isWinner = false;
 
     public Table(byte[,] board)
     {
@@ -43,6 +46,8 @@ public class Table
 
     public void MarkNumber(byte numberDrawn)
     {
+        if (_isWinner) return;
+
         _drawnNumbers.Add(numberDrawn);
 
         for (var vertical = 0; vertical < _board.GetLength(0); vertical++)
@@ -61,10 +66,10 @@ public class Table
 
     public bool IsWinner()
     {
-        var isAnyRowWinner = IsWinningRow();
-        var isAnyColumnWinner = IsWinningColumn();
+        if (_isWinner) return _isWinner;
 
-        return isAnyRowWinner || isAnyColumnWinner;
+        _isWinner = IsWinningRow() || IsWinningColumn();
+        return _isWinner;
 
         bool IsWinningRow()
         {
@@ -107,5 +112,22 @@ public class Table
 
             return false;
         }
+    }
+
+    public static Table Parse(string tableLines)
+    {
+        var board = tableLines
+            .SplitByEndOfLine()
+            .Select(
+                boardLine => boardLine
+                    .Split(' ')
+                    .Where(cell => !string.IsNullOrWhiteSpace(cell))
+                    .Select(cell => byte.Parse(cell))
+                    .ToArray()
+                )
+            .ToArray()
+            .To2D();
+
+        return new Table(board);
     }
 }

@@ -3,7 +3,10 @@
 public static class StringExtensions
 {
     public static string[] SplitByEndOfLine(this string text)
-        => text.Split($"{Environment.NewLine}");
+        => text.Split(Environment.NewLine);
+
+    public static string[] SplitByDoubleEndOfLine(this string text)
+        => text.Split($"{Environment.NewLine}{Environment.NewLine}");
 
     public static long[] ToNumbersSplitByEndOfLine(this string text)
     {

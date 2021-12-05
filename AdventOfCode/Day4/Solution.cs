@@ -11,7 +11,12 @@ namespace AdventOfCode.Day4
     {
         public long Solve(string input)
         {
-            return 0;
+            var (tables, draws) = PartInputTransformer.ExtractBingoComponents(input);
+            var bingo = new Bingo(tables, draws);
+            bingo.Play();
+            var winnersScore = bingo.GetWinnersScore();
+
+            return winnersScore.Value;
         }
     }
 
@@ -19,7 +24,33 @@ namespace AdventOfCode.Day4
     {
         public long Solve(string input)
         {
-            return 0;
+            var (tables, draws) = PartInputTransformer.ExtractBingoComponents(input);
+            var bingo = new RiggedBingo(tables, draws);
+            bingo.Play();
+            var winnersScore = bingo.GetWinnersScore();
+
+            return winnersScore.Value;
+        }
+    }
+
+    internal static class PartInputTransformer
+    {
+        public static (Table[], byte[]) ExtractBingoComponents(string input)
+        {
+            var lines = input.SplitByDoubleEndOfLine();
+
+            var draws = lines
+                .First()
+                .Split(',')
+                .Select(number => byte.Parse(number))
+                .ToArray();
+
+            var tables = lines
+                .Skip(1)
+                .Select(tableLines => Table.Parse(tableLines))
+                .ToArray();
+
+            return (tables, draws);
         }
     }
 }

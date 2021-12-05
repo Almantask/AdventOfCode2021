@@ -37,7 +37,7 @@ namespace AdventOfCode.Tests.Day4
             const long expectedSum = 310 * 5;
             SimulateDraws(table, draws);
 
-            var score = table.Score;
+            var score = table.CalculateScore();
 
             score.Should().Be(expectedSum);
         }
