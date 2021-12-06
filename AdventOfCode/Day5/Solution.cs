@@ -1,5 +1,5 @@
-﻿using AdventOfCode.Common;
-using AdventOfCode.Day4;
+﻿using System.Drawing;
+using AdventOfCode.Common;
 
 namespace AdventOfCode.Day5
 {
@@ -12,7 +12,31 @@ namespace AdventOfCode.Day5
     {
         public long Solve(string input)
         {
-            return 0;
+            var lines = input
+                .SplitByEndOfLine()
+                .Select(line => line.Split(" -> "))
+                .Select(
+                    pointsInLineString => new Line(
+                        ToPoint(pointsInLineString[0]),
+                        ToPoint(pointsInLineString[1]))
+                ).ToArray();
+            var map = new VentsMap(lines);
+
+            var overlapsOver2Count = map
+                .FindOverlaps()
+                .To1D()
+                .Count(overlap => overlap >= 2);
+
+            return overlapsOver2Count;
+        }
+
+        private static Point ToPoint(string commaSeparatedCoordinates)
+        {
+            var parts = commaSeparatedCoordinates.Split(',');
+            var x = byte.Parse(parts[0]);
+            var y = byte.Parse(parts[1]);
+
+            return new Point(x, y);
         }
     }
 

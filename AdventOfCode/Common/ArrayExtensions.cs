@@ -2,6 +2,19 @@
 {
     public static class JaggedArrayExtensions
     {
+        public static T[] To1D<T>(this T[,] source)
+        {
+            var oneDimensional = new T[source.GetLength(0) * source.GetLength(1)];
+            var index = 0;
+            foreach (var element in source)
+            {
+                oneDimensional[index] = element;
+                index++;
+            }
+
+            return oneDimensional;
+        }
+
         public static T[,] To2D<T>(this T[][] source)
         {
             try
