@@ -15,9 +15,7 @@ public class VentsMap
     {
         var allPoints = GetPointsAtLineEnds();
         var ventsMaps = InitializeMap(allPoints);
-        AssignValueWhenEqualTo(ventsMaps, 0, -1);
         AssignOverlaps(ventsMaps);
-        AssignValueWhenEqualTo(ventsMaps, -1, 0);
 
         return ventsMaps;
     }
@@ -28,8 +26,6 @@ public class VentsMap
             .Select(line => line.Beginning)
             .Union(_lines.Select(line => line.End), AlwaysFalse.Instance)
             .ToArray();
-
-
     }
 
     private class AlwaysFalse : IEqualityComparer<Point>
@@ -44,6 +40,7 @@ public class VentsMap
     private void AssignOverlaps(int[,] map)
     {
         var pointsInLines = _lines
+            .Where(line => !line.IsDiagonal)
             .Select(line => line.ToPoints())
             .SelectMany(linePoints => linePoints);
 
@@ -64,20 +61,5 @@ public class VentsMap
             .Max();
 
         return new int[maxX + 1, maxY + 1];
-    }
-
-    private static void AssignValueWhenEqualTo(int[,] items, int criteriaValue, int valueToBeSet)
-    {
-        for (var i = 0; i < items.GetLength(0); i++)
-        {
-            for (var j = 0; j < items.GetLength(1); j++)
-            {
-                var item = items[i, j];
-                if (item == criteriaValue)
-                {
-                    items[i, j] = valueToBeSet;
-                }
-            }
-        }
     }
 }

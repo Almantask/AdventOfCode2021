@@ -33,8 +33,8 @@ namespace AdventOfCode.Day5
         private static Point ToPoint(string commaSeparatedCoordinates)
         {
             var parts = commaSeparatedCoordinates.Split(',');
-            var x = byte.Parse(parts[0]);
-            var y = byte.Parse(parts[1]);
+            var x = int.Parse(parts[0]);
+            var y = int.Parse(parts[1]);
 
             return new Point(x, y);
         }
