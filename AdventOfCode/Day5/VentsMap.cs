@@ -4,9 +4,9 @@ namespace AdventOfCode.Day5;
 
 public class VentsMap
 {
-    private readonly Line[] _lines;
+    private readonly LineV1[] _lines;
 
-    public VentsMap(params Line[] lines)
+    public VentsMap(params LineV1[] lines)
     {
         _lines = lines;
     }
@@ -40,7 +40,7 @@ public class VentsMap
     private void AssignOverlaps(int[,] map)
     {
         var pointsInLines = _lines
-            .Where(line => !line.IsDiagonal)
+            .Where(line => line.IsValid())
             .Select(line => line.ToPoints())
             .SelectMany(linePoints => linePoints);
 

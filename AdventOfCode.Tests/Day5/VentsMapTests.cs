@@ -18,7 +18,7 @@ namespace AdventOfCode.Tests.Day5
         {
             get
             {
-                var line = new Line(new Point(0, 0), new Point(0, 2));
+                var line = new LineV1(new Point(0, 0), new Point(0, 2));
                 var singleLine = new VentsMap(line);
                 yield return new object[]
                 {
@@ -43,9 +43,9 @@ namespace AdventOfCode.Tests.Day5
                 var point2 = new Point(0, 2);
                 var point3 = new Point(0, 4);
                 var point4 = new Point(2, 4);
-                var line1 = new Line(point1, point2);
-                var line2 = new Line(point2, point3);
-                var line3 = new Line(point3, point4);
+                var line1 = new LineV1(point1, point2);
+                var line2 = new LineV1(point2, point3);
+                var line3 = new LineV1(point3, point4);
                 var Overlaps3 = new VentsMap(line1, line2, line3);
 
                 yield return new object[]
@@ -59,7 +59,7 @@ namespace AdventOfCode.Tests.Day5
                     }
                 };
 
-                var diagonalLine = new Line(new Point(0, 0), new Point(1, 3));
+                var diagonalLine = new LineV1(new Point(0, 0), new Point(1, 3));
                 var diagonalLineIgnored = new VentsMap(diagonalLine, diagonalLine);
                 yield return new object[]
                 {

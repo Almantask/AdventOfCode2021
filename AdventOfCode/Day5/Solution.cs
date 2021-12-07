@@ -8,7 +8,8 @@ namespace AdventOfCode.Day5
         protected override int Day => 5;
     }
 
-    public class Part1 : IPartSolution
+    public abstract class PartSolution<TLine> : IPartSolution
+    where TLine : LineV1
     {
         public long Solve(string input)
         {
@@ -16,7 +17,7 @@ namespace AdventOfCode.Day5
                 .SplitByEndOfLine()
                 .Select(line => line.Split(" -> "))
                 .Select(
-                    pointsInLineString => new Line(
+                    pointsInLineString => CreateLine(
                         ToPoint(pointsInLineString[0]),
                         ToPoint(pointsInLineString[1]))
                 ).ToArray();
@@ -38,18 +39,17 @@ namespace AdventOfCode.Day5
 
             return new Point(x, y);
         }
+
+        protected abstract TLine CreateLine(Point point1, Point point2);
     }
 
-    public class Part2 : IPartSolution
+    public class Part1 : PartSolution<LineV1>
     {
-        public long Solve(string input)
-        {
-            return 0;
-        }
+        protected override LineV1 CreateLine(Point point1, Point point2) => new(point1, point2);
     }
 
-    internal static class PartInputTransformer
+    public class Part2 : PartSolution<LineV2>
     {
-
+        protected override LineV2 CreateLine(Point point1, Point point2) => new(point1, point2);
     }
 }
