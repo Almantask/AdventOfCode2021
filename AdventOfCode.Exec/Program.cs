@@ -11,6 +11,7 @@ namespace AdventOfCode.Exec
             Solve<Day3.Solution>();
             Solve<Day4.Solution>();
             Solve<Day5.Solution>();
+            Solve<Day6.Solution>();
         }
 
         private static void Solve<TAdventOfCodeDay>() where TAdventOfCodeDay : IDaySolution, new()
