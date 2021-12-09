@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AdventOfCode.Day6;
 
 namespace AdventOfCode.Tests.Day6
 {
-    public class LanternfishTests
+    public class NaiveLanternFishesTests : LanternfishesTests<Lanternfishes.Naive>
+    {
+        protected override Lanternfishes.Naive BuildLanternfishes(int[] internalTimers) => new(internalTimers);
+    }
+
+    public class OptimalLanternFishesTests : LanternfishesTests<Lanternfishes.Optimal>
+    {
+        protected override Lanternfishes.Optimal BuildLanternfishes(int[] internalTimers) => new(internalTimers);
+    }
+
+    public abstract class LanternfishesTests<TLanternfishes> where TLanternfishes : ILanternfishes
     {
         [Fact]
         public void NewDay_When1InternalTimer0_IncrementsCount()
         {
-            var lanternFishes = new Lanternfishes(0);
+            var lanternFishes = BuildLanternfishes(0);
 
             lanternFishes.SimulateOneDay();
 
@@ -21,7 +27,7 @@ namespace AdventOfCode.Tests.Day6
         [Fact]
         public void NewDay_When1InternalTimer1_DoesNotIncrementCount()
         {
-            var lanternFishes = new Lanternfishes(1);
+            var lanternFishes = BuildLanternfishes(1);
 
             lanternFishes.SimulateOneDay();
 
@@ -32,7 +38,7 @@ namespace AdventOfCode.Tests.Day6
         public void NewDay_GivenDaysPassedForTheNewLanternfishToSpawnAnother_When1InternalTimer0_xxxx()
         {
             // Arrange
-            var lanternFishes = new Lanternfishes(0);
+            var lanternFishes = BuildLanternfishes(0);
             // +1, because one day is needed for the parent to spawn a new one.
             for (int i = 0; i < Lanternfishes.DaysUntilChildLanternfishSpawnAnother + 1; i++)
             {
@@ -48,5 +54,7 @@ namespace AdventOfCode.Tests.Day6
                                                $"After the {Lanternfishes.DaysUntilChildLanternfishSpawnAnother} days from being born ({Lanternfishes.DaysUntilChildLanternfishSpawnAnother + 1} in total) - the child spawns another fish." +
                                                "4 fishes total");
         }
+
+        protected abstract TLanternfishes BuildLanternfishes(params int[] internalTimers);
     }
 }

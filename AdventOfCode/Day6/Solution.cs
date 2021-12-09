@@ -1,5 +1,4 @@
 ﻿using AdventOfCode.Common;
-using AdventOfCode.Tests.Day6;
 
 namespace AdventOfCode.Day6
 {
@@ -8,8 +7,26 @@ namespace AdventOfCode.Day6
         protected override int Day => 6;
     }
 
-    public class Part1 : IPartSolution
+    public class Part1 : PartSolution
     {
+        protected override int DaysToSimulate => 80;
+
+        protected override ILanternfishes BuildLanternFishes(int[] internalTimers)
+            => new Lanternfishes.Naive(internalTimers);
+    }
+
+    public class Part2 : PartSolution
+    {
+        protected override int DaysToSimulate => 80; // 256
+
+        protected override ILanternfishes BuildLanternFishes(int[] internalTimers)
+            => new Lanternfishes.Optimal(internalTimers);
+    }
+
+    public abstract class PartSolution : IPartSolution
+    {
+        protected abstract int DaysToSimulate { get; }
+
         public long Solve(string input)
         {
             var internalTimers = input
@@ -17,36 +34,16 @@ namespace AdventOfCode.Day6
                 .Select(n => int.Parse(n))
                 .ToArray();
 
-            var lanternFishes = new Lanternfishes(internalTimers);
+            var lanternFishes = BuildLanternFishes(internalTimers);
 
-            const int daysToSimulate = 80;
-            for (var i = 0; i < daysToSimulate; i++)
+            for (var i = 0; i < DaysToSimulate; i++)
             {
                 lanternFishes.SimulateOneDay();
             }
 
             return lanternFishes.Count;
         }
-    }
 
-    public class Part2 : IPartSolution
-    {
-        public long Solve(string input)
-        {
-            var internalTimers = input
-                .Split(',')
-                .Select(n => int.Parse(n))
-                .ToArray();
-
-            var lanternFishes = new Lanternfishes(internalTimers);
-
-            //const int daysToSimulate = 256;
-            //for (var i = 0; i < daysToSimulate; i++)
-            //{
-            //    lanternFishes.SimulateOneDay();
-            //}
-
-            return lanternFishes.Count;
-        }
+        protected abstract ILanternfishes BuildLanternFishes(int[] internalTimers);
     }
 }
