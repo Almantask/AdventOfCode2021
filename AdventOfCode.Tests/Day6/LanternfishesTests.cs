@@ -40,7 +40,7 @@ namespace AdventOfCode.Tests.Day6
             // Arrange
             var lanternFishes = BuildLanternfishes(0);
             // +1, because one day is needed for the parent to spawn a new one.
-            for (int i = 0; i < Lanternfishes.DaysUntilChildLanternfishSpawnAnother + 1; i++)
+            for (int i = 0; i < Lanternfishes.NewFishPool + 1; i++)
             {
                 lanternFishes.SimulateOneDay();
             }
@@ -50,8 +50,8 @@ namespace AdventOfCode.Tests.Day6
 
             // Assert
             lanternFishes.Count.Should().Be(4, "On the first day parent spawn a new child." +
-                                               $"After {Lanternfishes.DaysUntilFirstLanternfishSpawnAnother} days - a parent is ready to spawn another child." +
-                                               $"After the {Lanternfishes.DaysUntilChildLanternfishSpawnAnother} days from being born ({Lanternfishes.DaysUntilChildLanternfishSpawnAnother + 1} in total) - the child spawns another fish." +
+                                               $"After {Lanternfishes.OldFishPool} days - a parent is ready to spawn another child." +
+                                               $"After the {Lanternfishes.NewFishPool} days from being born ({Lanternfishes.NewFishPool + 1} in total) - the child spawns another fish." +
                                                "4 fishes total");
         }
 

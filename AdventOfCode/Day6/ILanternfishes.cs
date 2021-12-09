@@ -2,7 +2,7 @@
 {
     public interface ILanternfishes
     {
-        int Count { get; }
+        long Count { get; }
 
         void SimulateOneDay();
     }
