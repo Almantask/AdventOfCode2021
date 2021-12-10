@@ -43,8 +43,6 @@ public class Lanternfishes
     {
         private const int TotalPools = NewFishPool + 1;
 
-        private const int SpawningDay = -1;
-
         public long Count => _internalTimersCounts.Sum();
 
         private readonly long[] _internalTimersCounts;
