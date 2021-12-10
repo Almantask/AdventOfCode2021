@@ -70,7 +70,7 @@ public class Lanternfishes
             // Fishes to spawn are at pool 0.
             var fishesToSpawn = _internalTimersCounts[0];
 
-            // Increment timers: so shift array elements by 1
+            // Decrement timers: so shift array elements by 1
             _internalTimersCounts.ShiftBy1ToLeft();
 
             _internalTimersCounts[OldFishPool] += fishesToSpawn;
