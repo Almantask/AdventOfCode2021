@@ -35,7 +35,7 @@ namespace AdventOfCode.Tests.Day6
         }
 
         [Fact]
-        public void NewDay_GivenDaysPassedForTheNewLanternfishToSpawnAnother_When1InternalTimer0_xxxx()
+        public void NewDay_GivenDaysPassedForTheNewLanternfishToSpawnAnother_When1InternalTimer0_Count4()
         {
             // Arrange
             var lanternFishes = BuildLanternfishes(0);

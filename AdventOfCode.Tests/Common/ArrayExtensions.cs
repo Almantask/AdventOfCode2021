@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Tests.Common
 {
-    public class JaggedArrayExtensions
+    public class ArrayExtensions
     {
         [Fact]
         public void ToJaggedArray_WhenMultidimensionalArrayIsRectangular_ReturnsJaggedArray()
@@ -34,6 +34,17 @@ namespace AdventOfCode.Tests.Common
             };
 
             Action toJaggedArrayWhenNotRectangular = () => rectangular2DArray.To2D();
+        }
+
+        [Fact]
+        public void ShiftToLeftBy1_ShiftsArrayElementsBy1ToLeft()
+        {
+            int[] elements = { 2, 6, 5 };
+            int[] expectedElements = { 6, 5, 2 };
+
+            elements.ShiftBy1ToLeft();
+
+            elements.Should().BeEquivalentTo(expectedElements);
         }
     }
 }

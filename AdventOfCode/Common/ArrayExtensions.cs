@@ -34,5 +34,17 @@
                 throw new InvalidOperationException("The given jagged array is not rectangular.");
             }
         }
+
+        public static void ShiftBy1ToLeft<T>(this T[] elements)
+        {
+            var first = elements.First();
+            for (var index = 1; index < elements.Length; index++)
+            {
+                var current = elements[index];
+                var previous = elements[index - 1] = current;
+            }
+
+            elements[^1] = first;
+        }
     }
 }

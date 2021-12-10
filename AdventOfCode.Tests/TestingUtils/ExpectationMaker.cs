@@ -2,7 +2,7 @@
 {
     public static class ExpectationMaker
     {
-        public static object[] Expect(int day, string file, int result)
+        public static object[] Expect(int day, string file, long result)
         {
             return new object[] { File.ReadAllText($"Input/Day{day}/{file}.txt"), result };
         }

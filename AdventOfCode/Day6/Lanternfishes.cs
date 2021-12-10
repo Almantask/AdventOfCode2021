@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Day6;
+﻿using AdventOfCode.Common;
+
+namespace AdventOfCode.Day6;
 
 public class Lanternfishes
 {
@@ -45,12 +47,12 @@ public class Lanternfishes
 
         public long Count => _internalTimersCounts.Sum();
 
-        private readonly int[] _internalTimersCounts;
+        private readonly long[] _internalTimersCounts;
 
         public Optimal(params int[] internalTimers)
         {
             // Timer starts at 8, but ends AFTER 0.
-            _internalTimersCounts = new int[TotalPools];
+            _internalTimersCounts = new long[TotalPools];
 
             foreach (var timer in internalTimers)
             {
@@ -62,34 +64,16 @@ public class Lanternfishes
         {
             // Split fishes into 9 pools, one for each counter.
             // Each day, fishes move from one pool to another.
-            // When their counter hits 0 - they spawn a new fish.
-            // Counter of a new fish is 8.
-            // Counter of an old fish which split is 6.
+            // When their counter hits 0 - they spawn a new fish (so extra fishes go to pool 8),
+            // while others go back to pool 6 (start pool).
 
+            // Fishes to spawn are at pool 0.
             var fishesToSpawn = _internalTimersCounts[0];
 
-            // So shift array elements by 1
+            // Increment timers: so shift array elements by 1
+            _internalTimersCounts.ShiftBy1ToLeft();
 
-            // And add fishes to spawn
-
-        }
-
-        private void IncrementTimers()
-        {
-            var newTimers = new int[TotalPools];
-            for (var currentPool = 0; currentPool < TotalPools; currentPool++)
-            {
-                int previousPool;
-                //if ()
-                //{
-                //    previousPool = 8;
-                //}
-                //else
-                //{
-
-                //}
-                newTimers[currentPool - 1)]
-            }
+            _internalTimersCounts[OldFishPool] += fishesToSpawn;
         }
     }
 }

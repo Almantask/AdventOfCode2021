@@ -17,7 +17,7 @@ namespace AdventOfCode.Day6
 
     public class Part2 : PartSolution
     {
-        protected override int DaysToSimulate => 80; // 256
+        protected override int DaysToSimulate => 256;
 
         protected override ILanternfishes BuildLanternFishes(int[] internalTimers)
             => new Lanternfishes.Optimal(internalTimers);
