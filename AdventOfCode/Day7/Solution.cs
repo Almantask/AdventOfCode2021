@@ -7,7 +7,20 @@ namespace AdventOfCode.Day7
         protected override int Day => 7;
     }
 
-    public class Part1 : IPartSolution
+    public class Part1 : ParSolution<CrabSubmarinesV1>
+    {
+        protected override CrabSubmarinesV1 BuildCrabSubmarines(int[] sumbarineHorizontalPositions)
+            => new(sumbarineHorizontalPositions);
+    }
+
+    public class Part2 : ParSolution<CrabSubmarinesV2>
+    {
+        protected override CrabSubmarinesV2 BuildCrabSubmarines(int[] sumbarineHorizontalPositions)
+            => new(sumbarineHorizontalPositions);
+    }
+
+    public abstract class ParSolution<TCrabSumbarines> : IPartSolution
+        where TCrabSumbarines : ICrabSubmarines
     {
         public long Solve(string input)
         {
@@ -16,19 +29,13 @@ namespace AdventOfCode.Day7
                 .Select(n => int.Parse(n))
                 .ToArray();
 
-            var crabSubmarines = new CrabSubmarines(submarinesHorizontalPositions);
+            var crabSubmarines = BuildCrabSubmarines(submarinesHorizontalPositions);
             var optimalAlignment = crabSubmarines.GetOptimalAlginment();
             var fuelCost = crabSubmarines.CalculateFuelCostTo(optimalAlignment);
 
             return fuelCost;
         }
-    }
 
-    public class Part2 : IPartSolution
-    {
-        public long Solve(string input)
-        {
-            return 0;
-        }
+        protected abstract TCrabSumbarines BuildCrabSubmarines(int[] sumbarineHorizontalPositions);
     }
 }
