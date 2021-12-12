@@ -10,7 +10,7 @@ namespace AdventOfCode.Tests.Common
         [InlineData(new[] { 3, 2, 1, 4 }, 2.5)]
         public void FindMedian_(int[] numbers, double expectedMedian)
         {
-            var median = numbers.FindMedian();
+            var median = numbers.Median();
 
             median.Should().Be(expectedMedian);
         }

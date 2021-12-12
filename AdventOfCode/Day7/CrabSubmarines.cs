@@ -11,7 +11,7 @@ namespace AdventOfCode.Day7
             _submarineHorizontalPositions = submarineHorizontalPositions;
         }
 
-        public int GetOptimalAlginment()
+        public int GetOptimalAlignment()
         {
             // Optimal position should be an average.
             var optimal = (int)Math.Ceiling(_submarineHorizontalPositions.Average());
@@ -73,9 +73,9 @@ namespace AdventOfCode.Day7
             _submarineHorizontalPositions = submarineHorizontalPositions;
         }
 
-        public int GetOptimalAlginment()
+        public int GetOptimalAlignment()
         {
-            return (int)Math.Ceiling(_submarineHorizontalPositions.FindMedian());
+            return (int)Math.Ceiling(_submarineHorizontalPositions.Median());
         }
 
         public long CalculateFuelCostTo(int horizontalPosition)

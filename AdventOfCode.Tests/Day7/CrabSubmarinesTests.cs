@@ -15,7 +15,7 @@ public class CrabSubmarines
         {
             var submarines = new CrabSubmarinesV1(crabSubmarineAlignments);
 
-            var optimalAlignment = submarines.GetOptimalAlginment();
+            var optimalAlignment = submarines.GetOptimalAlignment();
 
             optimalAlignment.Should().Be(expectedOptimal);
         }
@@ -47,7 +47,7 @@ public class CrabSubmarines
         {
             var submarines = new CrabSubmarinesV2(crabSubmarineAlignments);
 
-            var optimalAlignment = submarines.GetOptimalAlginment();
+            var optimalAlignment = submarines.GetOptimalAlignment();
 
             optimalAlignment.Should().Be(expectedOptimal);
         }

@@ -30,7 +30,7 @@ namespace AdventOfCode.Day7
                 .ToArray();
 
             var crabSubmarines = BuildCrabSubmarines(submarinesHorizontalPositions);
-            var optimalAlignment = crabSubmarines.GetOptimalAlginment();
+            var optimalAlignment = crabSubmarines.GetOptimalAlignment();
             var fuelCost = crabSubmarines.CalculateFuelCostTo(optimalAlignment);
 
             return fuelCost;

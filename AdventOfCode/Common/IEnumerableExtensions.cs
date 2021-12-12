@@ -8,7 +8,7 @@ namespace AdventOfCode.Common
 {
     public static class IEnumerableExtensions
     {
-        public static double FindMedian(this IEnumerable<int> numbers)
+        public static double Median(this IEnumerable<int> numbers)
         {
             if (numbers == null || !numbers.Any()) throw new InvalidOperationException("At least one number is required");
 

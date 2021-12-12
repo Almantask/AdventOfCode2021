@@ -3,6 +3,6 @@
     public interface ICrabSubmarines
     {
         long CalculateFuelCostTo(int horizontalPosition);
-        int GetOptimalAlginment();
+        int GetOptimalAlignment();
     }
 }
