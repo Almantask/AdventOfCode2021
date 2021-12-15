@@ -5,6 +5,37 @@ namespace AdventOfCode.Tests.Day8;
 
 public class DisplayExperimentTests
 {
+    // Different digits will have overlapping lit segments.
+    // This can be used to deduce which actual segments are lit.
+
+    // 1, 4, 7 and 8 - known.
+
+    // Consider 1 (c,f) for example
+    // 2 (a,**c**,d,e,g) and 5 (a,b,d,**f**,g)
+    // Knowing the overlapping segments - we can deduce whether c and f were mixed or not.
+
+    // 1 is our start. Use 2 and 5 to deduce exact positions (because they overlap at exactly one place).
+    // c, f - known.
+    // 1, 2, 4, 7 - known.
+
+    // 7 is next up and is an easy one (because there is only 1 extra segment) and it has unique segments count.
+    // **a**, c, f - known.
+    // 1, 2, 4, 7 - known.
+
+    // We will analyze 4 next (last number with unique count). b and d are unknown.
+    // 5 is the only number that has 2 segments off and overlaps with a 4 at a single place - b.
+    // The remaining segment in 4 is d.
+    // a, **b**, c, **d**, f - known.
+    // 1, 2, 4, **5**, 7 - known.
+
+    // 6 overlaps in all places but 1 with 5. The non-overlapping segment - e.
+    // a, b, c, d, **e**, f - known.
+    // 1, 2, 4, 5, **6**, 7 - known.
+
+    // The last missing segment is g. With it, we can deduce the remaining numbers.
+    // a, b, c, d, e, f, **g** - known.
+    // **0**, 1, 2, **3**, 4, 5, 6, 7 - known.
+
     [Fact]
     public void GetSignalPattern_WhenMoreThan10_ThrowsArgumentOutOfRangeException()
     {
