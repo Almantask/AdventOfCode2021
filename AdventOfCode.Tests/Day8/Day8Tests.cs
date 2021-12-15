@@ -10,9 +10,9 @@ namespace AdventOfCode.Tests.Day8
         {
             var part1 = new Part1();
 
-            var destination = part1.Solve(measures);
+            var actual = part1.Solve(measures);
 
-            destination.Should().Be(expected);
+            actual.Should().Be(expected);
         }
 
         [Theory]
@@ -21,9 +21,9 @@ namespace AdventOfCode.Tests.Day8
         {
             var part2 = new Part2();
 
-            var destination = part2.Solve(input);
+            var actual = part2.Solve(input);
 
-            destination.Should().Be(expected);
+            actual.Should().Be(expected);
         }
 
         public static IEnumerable<object[]> Part1
