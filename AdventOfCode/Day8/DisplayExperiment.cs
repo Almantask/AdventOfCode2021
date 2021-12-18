@@ -3,38 +3,40 @@
 
     public abstract class DisplayExperiment
     {
-        protected char[][] TenSignalPatterns { get; }
-        protected char[][] FourDigitsOutput { get; }
+        public int SignalsCount => SignalPatterns.Length;
+
+        protected char[][] SignalPatterns { get; }
+        protected char[][] DigitsOutput { get; }
 
         protected DisplayExperiment(string[] tenSignalPatterns, string[] fourDigitsOutput)
         {
-            TenSignalPatterns = tenSignalPatterns
+            SignalPatterns = tenSignalPatterns
                 .Select(pattern => pattern.Trim().ToCharArray())
                 .ToArray();
 
-            FourDigitsOutput = fourDigitsOutput
+            DigitsOutput = fourDigitsOutput
                 .Select(pattern => pattern.Trim().ToCharArray())
                 .ToArray(); ;
         }
 
         public char[] GetSignalPattern(int signalPatternIndex)
         {
-            if (signalPatternIndex >= TenSignalPatterns.Length)
+            if (signalPatternIndex >= SignalPatterns.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(signalPatternIndex));
             }
 
-            return TenSignalPatterns[signalPatternIndex];
+            return SignalPatterns[signalPatternIndex];
         }
 
         public char[] GetDigitOutput(int digitOutputIndex)
         {
-            if (digitOutputIndex >= FourDigitsOutput.Length)
+            if (digitOutputIndex >= DigitsOutput.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(digitOutputIndex));
             }
 
-            return FourDigitsOutput[digitOutputIndex];
+            return DigitsOutput[digitOutputIndex];
         }
 
         protected static (string[], string[]) ParseParts(string experimentText)

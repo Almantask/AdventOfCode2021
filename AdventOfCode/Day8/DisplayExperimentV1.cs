@@ -8,10 +8,10 @@ namespace AdventOfCode.Day8
         {
         }
 
-        public int FindDigitOne() => FourDigitsOutput.IndexOf(e => e.Length == 2);
-        public int FindDigitFour() => FourDigitsOutput.IndexOf(e => e.Length == 4);
-        public int FindDigitSeven() => FourDigitsOutput.IndexOf(e => e.Length == 3);
-        public int FindDigitEight() => FourDigitsOutput.IndexOf(e => e.Length == 7);
+        public int FindDigitOne() => DigitsOutput.IndexOf(e => e.Length == 2);
+        public int FindDigitFour() => DigitsOutput.IndexOf(e => e.Length == 4);
+        public int FindDigitSeven() => DigitsOutput.IndexOf(e => e.Length == 3);
+        public int FindDigitEight() => DigitsOutput.IndexOf(e => e.Length == 7);
 
         public static DisplayExperimentV1 Parse(string experimentText)
         {
