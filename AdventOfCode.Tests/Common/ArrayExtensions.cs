@@ -46,5 +46,50 @@ namespace AdventOfCode.Tests.Common
 
             elements.Should().BeEquivalentTo(expectedElements);
         }
+
+        [Fact]
+        public void IndexOf_GivenElementExists_ReturnsIndexOfElement()
+        {
+            int[] elements = { 1, 2, 3 };
+
+            var index = elements.IndexOf(e => e == 2);
+
+            index.Should().Be(1);
+        }
+
+        [Fact]
+        public void IndexOf_GivenElementExistsMultipleTimes_ReturnsIndexOfFirstOccurence()
+        {
+            int[] elements = { 2, 2, 3 };
+
+            var index = elements.IndexOf(e => e == 2);
+
+            index.Should().Be(0);
+        }
+
+        [Fact]
+        public void IndexOf_GivenElementDoesNotExist_ReturnsMinusOne()
+        {
+            int[] elements = { 1, 2, 3 };
+
+            var index = elements.IndexOf(e => e == 4);
+
+            index.Should().Be(-1);
+        }
+
+        [Theory]
+        [InlineData(new[] { 1, 2, 3 }, new[] { 1, 2, 3 }, true)]
+        [InlineData(new[] { 1, 3 }, new[] { 1, 2, 3 }, false)]
+        [InlineData(new[] { 1, 4, 3 }, new[] { 1, 2, 3 }, false)]
+        [InlineData(new int[0], new int[0], true)]
+        [InlineData(null, new int[0], false)]
+        [InlineData(new int[0], null, false)]
+        [InlineData(null, null, false)]
+        public void IsEquivalentTo_ReturnsTrueWhenBothArrayNotNullAndEquivalent(int[] a, int[] b, bool expectedIsEquivalent)
+        {
+            var isEquivalentTo = a.IsEquivalentTo(b);
+
+            isEquivalentTo.Should().Be(expectedIsEquivalent);
+        }
     }
 }

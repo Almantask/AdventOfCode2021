@@ -46,5 +46,28 @@
 
             elements[^1] = first;
         }
+
+        /// <summary>
+        /// Find index by <see cref="criteria"/> in <see cref="elements"/> array.
+        /// </summary>
+        /// <returns>-1 if not found, else index of the first element found by the criteria.</returns>
+        public static int IndexOf<T>(this T[] elements, Predicate<T> criteria)
+        {
+            for (int i = 0; i < elements.Length; i++)
+            {
+                if (criteria(elements[i])) return i;
+            }
+
+            const int notFound = -1;
+            return notFound;
+        }
+
+        public static bool IsEquivalentTo<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        {
+            if (a == null || b == null) return false;
+
+            var aCount = a.Count();
+            return (aCount == b.Count() && a.Intersect(b).Count() == aCount);
+        }
     }
 }

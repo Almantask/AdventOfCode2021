@@ -25,24 +25,38 @@ namespace AdventOfCode.Day8
             return neededDigitsCount;
         }
 
-        private static DisplayExperiment[] ParseExperiments(string input)
+        private static DisplayExperimentV1[] ParseExperiments(string input)
         {
             return input
                 .SplitByEndOfLine()
-                .Select(line => DisplayExperiment.Parse(line))
+                .Select(line => DisplayExperimentV1.Parse(line))
                 .ToArray();
         }
 
-        private int CountNeededDigits(DisplayExperiment[] experiments)
+        private int CountNeededDigits(DisplayExperimentV1[] experiments)
         {
             var neededDisplayDigitsCount = 0;
             foreach (var experiment in experiments)
             {
                 // Each experiment has 4 output digits, each needs to be checked.
                 const int outputDigitsCount = 4;
-                for (int experimentIndex = 0; experimentIndex < outputDigitsCount; experimentIndex++)
+                var indexOf1 = experiment.Find1();
+                var one = GetMixed(experiment, indexOf1);
+                var indexOf4 = experiment.Find4();
+                var four = GetMixed(experiment, indexOf4);
+                var indexOf7 = experiment.Find7();
+                var seven = GetMixed(experiment, indexOf7);
+                var indexOf8 = experiment.Find8();
+                var eight = GetMixed(experiment, indexOf8);
+
+                for (int outputDigitIndex = 0; outputDigitIndex < outputDigitsCount; outputDigitIndex++)
                 {
-                    if (IsNeededDisplayDigit(experiment, experimentIndex))
+                    var outputDigit = experiment.GetDigitOutput(outputDigitIndex);
+                    var isNeededDisplayDigit = outputDigit.IsEquivalentTo(one) ||
+                                               outputDigit.IsEquivalentTo(four) ||
+                                               outputDigit.IsEquivalentTo(seven) ||
+                                               outputDigit.IsEquivalentTo(eight);
+                    if (isNeededDisplayDigit)
                     {
                         neededDisplayDigitsCount++;
                     }
@@ -50,13 +64,13 @@ namespace AdventOfCode.Day8
             }
 
             return neededDisplayDigitsCount;
-        }
 
-        private static bool IsNeededDisplayDigit(DisplayExperiment experiment, int experimentIndex)
-        {
-            var segmentsOfOutputDigit = experiment.GetDigitOutput(experimentIndex);
-            var isNeededDigit = _neededDisplayDigits.Any(d => d.IsGuaranteedToBeMadeFromRandomSegments(segmentsOfOutputDigit));
-            return isNeededDigit;
+            char[] GetMixed(DisplayExperiment experiment, int outputIndex)
+            {
+                const int notFound = -1;
+                if (outputIndex == notFound) return Array.Empty<char>();
+                return experiment.GetDigitOutput(outputIndex);
+            }
         }
     }
 
