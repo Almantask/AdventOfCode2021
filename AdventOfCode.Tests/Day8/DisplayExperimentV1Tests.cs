@@ -8,8 +8,8 @@ public class DisplayExperimentV1Tests : DisplayExperimentTests
     [Fact]
     public void Find1_ReturnsIndexOf1InTheOutput()
     {
-        //                                                                             index of 1: 9|
-        //                                                                                          v
+        //                                                                                                    index of 1: 3|
+        //                                                                                                                v
         const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb ab";
         var experiment = DisplayExperimentV1.Parse(standardExperiment);
 
@@ -21,7 +21,7 @@ public class DisplayExperimentV1Tests : DisplayExperimentTests
     [Fact]
     public void Find4_ReturnsIndexOf4InTheOutput()
     {
-        //                                                                                               index of 4: 7|
+        //                                                                                               index of 4: 2|
         //                                                                                                            v
         const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb eafb cdbaf";
         var experiment = DisplayExperimentV1.Parse(standardExperiment);
@@ -34,7 +34,7 @@ public class DisplayExperimentV1Tests : DisplayExperimentTests
     [Fact]
     public void Find7_ReturnsIndexOf7InTheOutput()
     {
-        //                                                                                       index of 7: 4|
+        //                                                                                       index of 7: 1|
         //                                                                                                    v
         const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb dab cdfeb cdbaf";
         var experiment = DisplayExperimentV1.Parse(standardExperiment);
