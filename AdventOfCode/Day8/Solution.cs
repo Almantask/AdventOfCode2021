@@ -40,13 +40,13 @@ namespace AdventOfCode.Day8
             {
                 // Each experiment has 4 output digits, each needs to be checked.
                 const int outputDigitsCount = 4;
-                var indexOf1 = experiment.Find1();
+                var indexOf1 = experiment.FindDigitOne();
                 var one = GetMixed(experiment, indexOf1);
-                var indexOf4 = experiment.Find4();
+                var indexOf4 = experiment.FindDigitFour();
                 var four = GetMixed(experiment, indexOf4);
-                var indexOf7 = experiment.Find7();
+                var indexOf7 = experiment.FindDigitSeven();
                 var seven = GetMixed(experiment, indexOf7);
-                var indexOf8 = experiment.Find8();
+                var indexOf8 = experiment.FindDigitEight();
                 var eight = GetMixed(experiment, indexOf8);
 
                 for (int outputDigitIndex = 0; outputDigitIndex < outputDigitsCount; outputDigitIndex++)

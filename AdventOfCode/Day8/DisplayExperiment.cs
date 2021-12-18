@@ -2,27 +2,50 @@
 
 namespace AdventOfCode.Day8
 {
+    /// <summary>
+    /// <para>
+    /// Digit eight is always needed as an argument, because it will be used as a map for all the other digits.
+    /// In other words- it is the complete 7-digit segments array.
+    /// </para>
+    /// <para>
+    /// Finding a digit means looking for its index inside 10-signals.
+    /// </para>
+    /// <para>
+    /// Finding a segments means looking for its index inside digit eight.
+    /// </para>
+    /// </summary>
     public class DisplayExperimentV2 : DisplayExperiment
     {
-        protected DisplayExperimentV2(string[] tenSignalPatterns, string[] fourDigitsOutput) : base(tenSignalPatterns, fourDigitsOutput)
+        private DisplayExperimentV2(string[] tenSignalPatterns, string[] fourDigitsOutput) : base(tenSignalPatterns, fourDigitsOutput)
         {
         }
 
-        public int Find0()
+        /// <summary>
+        /// Digit seven compared to digit one has 1 extra segment - a.
+        /// </summary>
+        public int FindSegmentA(char[] seven, char[] one, char[] eight)
         {
-            return 0;
+            var segmentA = seven.Except(one).First();
+            var indexOfSegmentA = eight.IndexOf(segment => segment == segmentA);
+            return indexOfSegmentA;
         }
 
-        public int Find1() => TenSignalPatterns.IndexOf(e => e.Length == 2);
+        public int FindDigitOne() => TenSignalPatterns.IndexOf(e => e.Length == 2);
 
-        public int Find2() => 0;
+        /// <summary>
+        /// Digit two overlaps with digit one at exactly one position - c.
+        /// </summary>
+        public (int indexOfTwo, int indexOfC) Find2AndC(char[] one)
+        {
+            return (1, 1);
+        }
 
         public int Find3()
         {
             return 0;
         }
 
-        public int Find4() => TenSignalPatterns.IndexOf(e => e.Length == 4);
+        public int FindDigitFour() => TenSignalPatterns.IndexOf(e => e.Length == 4);
 
         public int Find5()
         {
@@ -34,9 +57,12 @@ namespace AdventOfCode.Day8
             return 0;
         }
 
-        public int Find7() => TenSignalPatterns.IndexOf(e => e.Length == 3);
+        // 7 compared to 1 has 1 extra segment.
+        // **a**, c, f - known.
+        // 1, 2, 4, 5, 7, 8 - known.
+        public int FindDigitSeven() => TenSignalPatterns.IndexOf(e => e.Length == 3);
 
-        public int Find8() => TenSignalPatterns.IndexOf(e => e.Length == 7);
+        public int FindDigitEight() => TenSignalPatterns.IndexOf(e => e.Length == 7);
 
         public int Find9()
         {
@@ -52,14 +78,14 @@ namespace AdventOfCode.Day8
 
     public class DisplayExperimentV1 : DisplayExperiment
     {
-        public DisplayExperimentV1(string[] tenSignalPatterns, string[] fourDigitsOutput) : base(tenSignalPatterns, fourDigitsOutput)
+        private DisplayExperimentV1(string[] tenSignalPatterns, string[] fourDigitsOutput) : base(tenSignalPatterns, fourDigitsOutput)
         {
         }
 
-        public int Find1() => FourDigitsOutput.IndexOf(e => e.Length == 2);
-        public int Find4() => FourDigitsOutput.IndexOf(e => e.Length == 4);
-        public int Find7() => FourDigitsOutput.IndexOf(e => e.Length == 3);
-        public int Find8() => FourDigitsOutput.IndexOf(e => e.Length == 7);
+        public int FindDigitOne() => FourDigitsOutput.IndexOf(e => e.Length == 2);
+        public int FindDigitFour() => FourDigitsOutput.IndexOf(e => e.Length == 4);
+        public int FindDigitSeven() => FourDigitsOutput.IndexOf(e => e.Length == 3);
+        public int FindDigitEight() => FourDigitsOutput.IndexOf(e => e.Length == 7);
 
         public static DisplayExperimentV1 Parse(string experimentText)
         {
@@ -67,8 +93,6 @@ namespace AdventOfCode.Day8
             return new DisplayExperimentV1(tenSignalPatterns, fourDigitsOutput);
         }
     }
-
-
 
     public abstract class DisplayExperiment
     {

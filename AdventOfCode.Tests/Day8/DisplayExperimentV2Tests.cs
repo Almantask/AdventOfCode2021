@@ -31,58 +31,74 @@ public class DisplayExperimentV2Tests : DisplayExperimentTests
     // a, b, c, d, e, f, **g** - known.
     // **0**, 1, 2, **3**, 4, 5, 6, 7, 8, **9** - known.
 
+    #region Known Numbers
+
     [Fact]
-    public void Find1_ReturnsIndexOf1InTheOutput()
+    public void FindDigitOne_ReturnsIndexOf1In10Signals()
     {
         //                                                                             index of 1: 9|
         //                                                                                          v
         const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb ab";
         var experiment = DisplayExperimentV2.Parse(standardExperiment);
 
-        var indexOf1 = experiment.Find1();
+        var indexOf1 = experiment.FindDigitOne();
 
         indexOf1.Should().Be(9);
     }
 
     [Fact]
-    public void Find4_ReturnsIndexOf4InTheOutput()
+    public void FindDigitFour_ReturnsIndexOf4In10Signals()
     {
         //                                                                 index of 4: 7|
         //                                                                              v
         const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb eafb cdbaf";
         var experiment = DisplayExperimentV2.Parse(standardExperiment);
 
-        var indexOf4 = experiment.Find4();
+        var indexOf4 = experiment.FindDigitFour();
 
         indexOf4.Should().Be(7);
     }
 
     [Fact]
-    public void Find7_ReturnsIndexOf7InTheOutput()
+    public void FindDigitSeven_ReturnsIndexOf7In10Signals()
     {
         //                                               index of 7: 4|
         //                                                            v
         const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb dab cdfeb cdbaf";
         var experiment = DisplayExperimentV2.Parse(standardExperiment);
 
-        var indexOf4 = experiment.Find7();
+        var indexOf4 = experiment.FindDigitSeven();
 
         indexOf4.Should().Be(4);
     }
 
     [Fact]
-    public void Find8_ReturnsIndexOf8InTheOutput()
+    public void FindDigitEight_ReturnsIndexOf8In10Signals()
     {
         //                        index of 8: 0|
         //                                     v
         const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | acedgfb fcadb cdfeb cdbaf";
         var experiment = DisplayExperimentV2.Parse(standardExperiment);
 
-        var indexOf4 = experiment.Find8();
+        var indexOf4 = experiment.FindDigitEight();
 
         indexOf4.Should().Be(0);
     }
 
+    #endregion
+
+    [Fact]
+    public void FindDigit2AndSegmentC_ReturnsIndexOf2AndCIn10Signals()
+    {
+        //                        index of 8: 0|
+        //                                     v
+        const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | acedgfb fcadb cdfeb cdbaf";
+        var experiment = DisplayExperimentV2.Parse(standardExperiment);
+
+        var indexOf4 = experiment.FindDigitEight();
+
+        indexOf4.Should().Be(0);
+    }
 
     protected override DisplayExperiment InitializeExperiment(string experiment) => DisplayExperimentV2.Parse(experiment);
 }
