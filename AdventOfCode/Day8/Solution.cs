@@ -78,7 +78,18 @@ namespace AdventOfCode.Day8
     {
         public long Solve(string input)
         {
-            return 0;
+            var experiments = ParseExperiments(input);
+            var displays = experiments.Select(e => new SubmarineDisplay(e)).ToArray();
+
+            return displays.Sum(d => d.Output);
+        }
+
+        private static DisplayExperimentV2[] ParseExperiments(string input)
+        {
+            return input
+                .SplitByEndOfLine()
+                .Select(line => DisplayExperimentV2.Parse(line))
+                .ToArray();
         }
     }
 }

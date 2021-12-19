@@ -5,22 +5,21 @@ namespace AdventOfCode.Tests.Day8;
 
 public class DisplayExperimentV2Tests : DisplayExperimentTests
 {
-    private const string Any = "xxxxxxxxxxxxxxx";
-    private const string Zero = "cagedb";
-    private const string One = "ab";
-    private const string Two = "gcdfa";
-    private const string Three = "fbcad";
-    private const string Four = "eafb";
-    private const string Five = "cdfbe";
-    private const string Six = "cdfgeb";
-    private const string Seven = "dab";
-    private const string Eight = "acedgfb";
-    private const string Nine = "cefabd";
+    public const string Zero = "cagedb";
+    public const string One = "ab";
+    public const string Two = "gcdfa";
+    public const string Three = "fbcad";
+    public const string Four = "eafb";
+    public const string Five = "cdfbe";
+    public const string Six = "cdfgeb";
+    public const string Seven = "dab";
+    public const string Eight = "acedgfb";
+    public const string Nine = "cefabd";
 
     private readonly DisplayExperimentV2 _experiment;
     public DisplayExperimentV2Tests()
     {
-        const string standardExperiment = $"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Any}";
+        const string standardExperiment = $"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Zero} {One} {One} {Five}";
         _experiment = DisplayExperimentV2.Parse(standardExperiment);
     }
 
