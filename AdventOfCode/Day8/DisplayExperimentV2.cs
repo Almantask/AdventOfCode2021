@@ -9,7 +9,7 @@ namespace AdventOfCode.Day8
     /// In other words- it is the complete 7-digit segments array.
     /// </para>
     /// <para>
-    /// Finding a digit means looking for its index inside 10-signals.
+    /// Finding a digit means looking for its segments inside 10-signals.
     /// </para>
     /// <para>
     /// Finding a segments means looking for its equivalent inside digit eight segments.
@@ -26,13 +26,13 @@ namespace AdventOfCode.Day8
 
         #region Step 1: Numbers with unique count of segments
 
-        public int FindDigitOne() => SignalPatterns.IndexOf(e => e.Length == 2);
+        public char[] FindDigitOne() => GetDigitSegmentsMatchingCriteria(e => e.Length == 2);
 
-        public int FindDigitFour() => SignalPatterns.IndexOf(e => e.Length == 4);
+        public char[] FindDigitFour() => GetDigitSegmentsMatchingCriteria(e => e.Length == 4);
 
-        public int FindDigitSeven() => SignalPatterns.IndexOf(e => e.Length == 3);
+        public char[] FindDigitSeven() => GetDigitSegmentsMatchingCriteria(e => e.Length == 3);
 
-        public int FindDigitEight() => SignalPatterns.IndexOf(e => e.Length == 7);
+        public char[] FindDigitEight() => GetDigitSegmentsMatchingCriteria(e => e.Length == 7);
 
         // Known:
         // **1**, **4**, **7**, **8**
@@ -45,7 +45,7 @@ namespace AdventOfCode.Day8
         /// Digit two overlaps with digit one at exactly 1 segment - c.
         /// Digit two overlaps with digit four at 2 segments.
         /// </summary>
-        public (int indexOfDigitTwo, char segmentC) FindDigitTwoAndSegmentC(char[] digitOne, char[] digitFour)
+        public (char[] digitTwoSegments, char segmentC) FindDigitTwoAndSegmentC(char[] digitOne, char[] digitFour)
         {
             for (int i = 0; i < SignalsCount; i++)
             {
@@ -59,7 +59,7 @@ namespace AdventOfCode.Day8
                 var isDigitTwo = digitFour.Intersect(signal).Count() == 2;
                 if (isDigitTwo)
                 {
-                    return (i, overlap.First());
+                    return (GetSignalPattern(i), overlap.First());
                 }
             }
 
@@ -69,23 +69,25 @@ namespace AdventOfCode.Day8
         /// <summary>
         /// Digit five overlaps with digit one at exactly 1 segment - f.
         /// Digit five overlaps with digit four at 3 segments.
+        /// Digit 5 has 5 segments.
         /// </summary>
-        public (int indexOfDigitFive, char segmentF) FindDigitFiveAndSegmentF(char[] digitOne, char[] digitFour)
+        public (char[] digitFiveSegments, char segmentF) FindDigitFiveAndSegmentF(char[] digitOne, char[] digitFour)
         {
             for (int i = 0; i < SignalsCount; i++)
             {
                 var signal = GetSignalPattern(i);
                 var overlap = digitOne.Intersect(signal);
 
-                var isDigitTwoOrDigitFive = overlap.Count() == 1;
-                if (!isDigitTwoOrDigitFive) continue;
+                var isDigitFiveOrDigitSixOrDigitTwo = overlap.Count() == 1;
+                if (!isDigitFiveOrDigitSixOrDigitTwo) continue;
 
                 // Digit five overlaps with digit four at 3 segments.
-                var isDigitTwo = digitFour.Intersect(signal).Count() == 3;
-                if (isDigitTwo)
-                {
-                    return (i, overlap.First());
-                }
+                var isDigitFiveOrDigitSix = digitFour.Intersect(signal).Count() == 3;
+                if (!isDigitFiveOrDigitSix) continue;
+
+                // Digit 5 has 5 segments
+                var isDigitFive = signal.Length == 5;
+                if (isDigitFive) return (GetSignalPattern(i), overlap.First());
             }
 
             throw new InvalidOperationException("Either not a digit one passed or an invalid experiment");
@@ -114,7 +116,7 @@ namespace AdventOfCode.Day8
         /// Knowing segment d - we're left with the last segment on digit four - b.
         /// </summary>
         /// <returns></returns>
-        public (int digitThree, char segementD, char segmentB) FindDigitThreeAndSegmentDAndSegmentB(char[] digitOne, char[] digitFour)
+        public (char[] digitThreeSegments, char segementD, char segmentB) FindDigitThreeAndSegmentDAndSegmentB(char[] digitOne, char[] digitFour)
         {
             var digitFourOverlapWithDigitOne = digitOne.Intersect(digitFour).ToArray();
             for (int i = 0; i < SignalsCount; i++)
@@ -137,7 +139,7 @@ namespace AdventOfCode.Day8
                     .Except(new[] { segmentD })
                     .First();
 
-                return (indexOfDigitThree, segmentD, segmentB);
+                return (GetSignalPattern(indexOfDigitThree), segmentD, segmentB);
             }
 
             throw new InvalidOperationException("Either invalid digits passed or an invalid experiment");
@@ -153,8 +155,9 @@ namespace AdventOfCode.Day8
 
         /// <summary>
         /// Digit six overlaps in all segments but 1 with digit five - e.
+        /// It also must contain C - because otherwise it can be confused with a digit nine.
         /// </summary>
-        public (int digitSix, char segmentE) FindDigitSixAndSegmentE(char[] digitFive)
+        public (char[] digitSixSegments, char segmentE) FindDigitSixAndSegmentE(char[] digitFive, char segmentC)
         {
             var digitSixSegmentsCount = DisplayDigit.Create(6).Segments.Length;
             for (int i = 0; i < SignalsCount; i++)
@@ -163,14 +166,15 @@ namespace AdventOfCode.Day8
                 var signalSegmentsCount = signal.Length;
                 if (signalSegmentsCount != digitSixSegmentsCount) continue;
 
-                var intersection = signal.Intersect(digitFive).ToArray();
-                var intersectionSegmentsCount = intersection.Count();
-                if (signalSegmentsCount - intersectionSegmentsCount != 1) continue;
+                var segmentNotInFive = signal.Except(digitFive).ToArray();
+                if (segmentNotInFive.Count() != 1) continue;
 
-                var indexOfDigitSix = i;
-                var segmentE = signal.Except(intersection).First();
+                var segmentE = segmentNotInFive.First();
+                // Is the difference is C - that means it is a nine, however we need a six.
+                var isSix = segmentE != segmentC;
+                if (!isSix) continue;
 
-                return (indexOfDigitSix, segmentE);
+                return (GetSignalPattern(i), segmentE);
             }
 
             throw new InvalidOperationException("Either invalid digits passed or an invalid experiment");
@@ -184,20 +188,23 @@ namespace AdventOfCode.Day8
 
         #region Step 5: The last remaining segment
 
-        // The last missing segment is g. With it, we can deduce the remaining numbers.
-        public char FindSegmentG(char[] knownSegments, char[] unknownSegments)
+        /// <summary>
+        /// The last missing segment is g. With it, we can deduce the remaining numbers.
+        /// </summary>
+        public char FindSegmentG(char[] knownSegments)
         {
-            return unknownSegments.Except(knownSegments).First();
+            var allSegments = DisplayDigit.Create(8).Segments;
+            return allSegments.Except(knownSegments).First();
         }
 
-        public int FindDigitZero(Dictionary<char, char> segmentsMap)
+        public char[] FindDigitZero(Dictionary<char, char> segmentsMap)
         {
             var properDigitZero = DisplayDigit.Create(0);
             char[] digitZeroAsSignal = MapToSignalSegments(segmentsMap, properDigitZero);
             return FindDigitAsSignal(digitZeroAsSignal);
         }
 
-        public int FindDigitNine(Dictionary<char, char> segmentsMap)
+        public char[] FindDigitNine(Dictionary<char, char> segmentsMap)
         {
             var properDigitNine = DisplayDigit.Create(9);
             char[] digitZeroAsSignal = MapToSignalSegments(segmentsMap, properDigitNine);
@@ -216,14 +223,14 @@ namespace AdventOfCode.Day8
             return digitZeroAsSignal;
         }
 
-        private int FindDigitAsSignal(char[] digitAsSignal)
+        private char[] FindDigitAsSignal(char[] digitAsSignal)
         {
             for (int i = 0; i < SignalsCount; i++)
             {
                 var signal = GetSignalPattern(i);
                 if (signal.IsEquivalentTo(digitAsSignal))
                 {
-                    return i;
+                    return GetSignalPattern(i);
                 }
             }
 
@@ -240,6 +247,12 @@ namespace AdventOfCode.Day8
         {
             var (tenSignalPatterns, fourDigitsOutput) = ParseParts(experimentText);
             return new DisplayExperimentV2(tenSignalPatterns, fourDigitsOutput);
+        }
+
+        private char[] GetDigitSegmentsMatchingCriteria(Predicate<char[]> criteria)
+        {
+            var index = SignalPatterns.IndexOf(criteria);
+            return GetSignalPattern(index);
         }
     }
 }

@@ -17,79 +17,53 @@ public class DisplayExperimentV2Tests : DisplayExperimentTests
     private const string Eight = "acedgfb";
     private const string Nine = "cefabd";
 
-    // Indexes of digit come from signals (not output)
+    private readonly DisplayExperimentV2 _experiment;
+    public DisplayExperimentV2Tests()
+    {
+        const string standardExperiment = $"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Any}";
+        _experiment = DisplayExperimentV2.Parse(standardExperiment);
+    }
 
     [Fact]
     public void FindDigitOne_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {One} {Any} | {Any}";
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var digitOneSegments = _experiment.FindDigitOne();
 
-        // Act
-        var indexOf1 = experiment.FindDigitOne();
-
-        // Assert
-        indexOf1.Should().Be(1);
+        digitOneSegments.Should().BeEquivalentTo(One.ToCharArray());
     }
 
     [Fact]
     public void FindDigitFour_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {Four} {Any} | {Any}";
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var digitFourSegments = _experiment.FindDigitFour();
 
-        // Act
-        var indexOf4 = experiment.FindDigitFour();
-
-        // Assert
-        indexOf4.Should().Be(1);
+        digitFourSegments.Should().BeEquivalentTo(Four.ToCharArray());
     }
 
     [Fact]
     public void FindDigitSeven_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {Seven} {Any} | {Any}";
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var digitSevenSegments = _experiment.FindDigitSeven();
 
-        // Act
-        var indexOf4 = experiment.FindDigitSeven();
-
-        // Assert
-        indexOf4.Should().Be(1);
+        digitSevenSegments.Should().BeEquivalentTo(Seven.ToCharArray());
     }
 
     [Fact]
     public void FindDigitEight_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {Eight} {Any} | {Any}";
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var digitEightSegments = _experiment.FindDigitEight();
 
-        // Act
-        var indexOf4 = experiment.FindDigitEight();
-
-        // Assert
-        indexOf4.Should().Be(1);
+        digitEightSegments.Should().BeEquivalentTo(Eight.ToCharArray());
     }
 
     [Fact]
     public void FindDigitTwoAndSegmentC_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {Two} {One} {Four} | {Any}";
-        char[] digitOne = One.ToCharArray();
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var (digitTwoSegments, segmentC) = _experiment.FindDigitTwoAndSegmentC(One.ToCharArray(), Four.ToCharArray());
 
-        // Act
-        var (indexOfDigitTwo, segmentC) = experiment.FindDigitTwoAndSegmentC(digitOne, Four.ToCharArray());
-
-        // Assert
         using (new AssertionScope())
         {
-            indexOfDigitTwo.Should().Be(1, "Digit two overlaps with digit four at 2 segments.");
+            digitTwoSegments.Should().BeEquivalentTo(Two.ToCharArray(), "Digit two overlaps with digit four at 2 segments.");
             segmentC.Should().Be('a', "Digit two overlaps with digit one at exactly 1 segment");
         }
     }
@@ -97,18 +71,11 @@ public class DisplayExperimentV2Tests : DisplayExperimentTests
     [Fact]
     public void FindDigitFiveAndSegmentF_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {Five} {One} {Four} | {Any}";
-        char[] digitOne = One.ToCharArray();
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var (digitFiveSegments, segmentC) = _experiment.FindDigitFiveAndSegmentF(One.ToCharArray(), Four.ToCharArray());
 
-        // Act
-        var (indexOfDigitFive, segmentC) = experiment.FindDigitFiveAndSegmentF(digitOne, Four.ToCharArray());
-
-        // Assert
         using (new AssertionScope())
         {
-            indexOfDigitFive.Should().Be(1, "Digit five overlaps with digit four at 3 segments.");
+            digitFiveSegments.Should().BeEquivalentTo(Five.ToCharArray(), "Digit five overlaps with digit four at 3 segments.");
             segmentC.Should().Be('b', "Digit five overlaps with digit one at exactly 1 segment");
         }
     }
@@ -116,31 +83,19 @@ public class DisplayExperimentV2Tests : DisplayExperimentTests
     [Fact]
     public void FindSegmentA_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Seven} {One} | {Any}";
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var segmentA = _experiment.FindSegmentA(Seven.ToCharArray(), One.ToCharArray());
 
-        // Act
-        var segmentA = experiment.FindSegmentA(Seven.ToCharArray(), One.ToCharArray());
-
-        // Assert
         segmentA.Should().Be('d', "Digit seven compared to digit one has 1 extra segment");
     }
 
     [Fact]
     public void FindDigitThreeAndSegmentDAndSegmentB_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {One} {Four} {Three} | {Any}";
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var (digitThreeSegments, segmentD, segmentB) = _experiment.FindDigitThreeAndSegmentDAndSegmentB(One.ToCharArray(), Four.ToCharArray());
 
-        // Act
-        var (indexOfDigitThree, segmentD, segmentB) = experiment.FindDigitThreeAndSegmentDAndSegmentB(One.ToCharArray(), Four.ToCharArray());
-
-        // Assert
         using (new AssertionScope())
         {
-            indexOfDigitThree.Should().Be(3, "Digit four overlaps with digit three at a 1 extra segment");
+            digitThreeSegments.Should().BeEquivalentTo(Three.ToCharArray(), "Digit four overlaps with digit three at a 1 extra segment");
             segmentD.Should().Be('f', "Digit four overlaps with digit three at a 1 extra segment");
             segmentB.Should().Be('e', "Knowing segment d - we're left with the last segment on digit four");
         }
@@ -149,17 +104,11 @@ public class DisplayExperimentV2Tests : DisplayExperimentTests
     [Fact]
     public void FindDigitSixAndSegmentE_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {Six} {Five} | {Any}";
-        var experiment = DisplayExperimentV2.Parse(experimentText);
+        var (digitSixSegments, segmentE) = _experiment.FindDigitSixAndSegmentE(Five.ToCharArray(), 'a');
 
-        // Act
-        var (indexOfDigitSix, segmentE) = experiment.FindDigitSixAndSegmentE(Five.ToCharArray());
-
-        // Assert
         using (new AssertionScope())
         {
-            indexOfDigitSix.Should().Be(1, "Digit six overlaps in all segments but 1 with digit five");
+            digitSixSegments.Should().BeEquivalentTo(Six.ToCharArray(), "Digit six overlaps in all segments but 1 with digit five");
             segmentE.Should().Be('g', "Digit six overlaps in all segments but 1 with digit five");
         }
     }
@@ -167,48 +116,35 @@ public class DisplayExperimentV2Tests : DisplayExperimentTests
     [Fact]
     public void FindSegmentG_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} | {Any}";
-        var experiment = DisplayExperimentV2.Parse(experimentText);
-        var knownSegments = "badcge";
-        var unknownSegments = "badcgef";
+        var knownSegments = "badcge".ToCharArray();
 
-        // Act
-        var segmentG = experiment.FindSegmentG(knownSegments.ToCharArray(), unknownSegments.ToCharArray());
+        var segmentG = _experiment.FindSegmentG(knownSegments);
 
-        // Assert
         segmentG.Should().Be('f', "G is the last missing segment");
     }
 
     [Fact]
     public void FindDigitZero_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {Zero} {Any} | {Any}";
         var segmentsMap = new Dictionary<char, char>()
         {
             {'a', 'c'},
             {'b', 'a'},
             {'c', 'g'},
-            {'d', 'd'}, // ?
+            {'d', 'd'},
             {'e', 'e'},
             {'f', 'd'},
             {'g', 'b'},
         };
-        var experiment = DisplayExperimentV2.Parse(experimentText);
 
-        // Act
-        var indexOfDigitZero = experiment.FindDigitZero(segmentsMap);
+        var digitZeroSegments = _experiment.FindDigitZero(segmentsMap);
 
-        // Assert
-        indexOfDigitZero.Should().Be(1, $"Because digit one is made from segments: {DisplayDigit.Create(0)}");
+        digitZeroSegments.Should().BeEquivalentTo(Zero.ToCharArray(), $"Because digit one is made from segments: {DisplayDigit.Create(0)}");
     }
 
     [Fact]
     public void FindDigitNine_ReturnsExpected()
     {
-        // Arrange
-        const string experimentText = $"{Any} {Nine} {Any} | {Any}";
         var segmentsMap = new Dictionary<char, char>()
         {
             {'a', 'c'},
@@ -219,14 +155,11 @@ public class DisplayExperimentV2Tests : DisplayExperimentTests
             {'f', 'd'},
             {'g', 'b'},
         };
-        var experiment = DisplayExperimentV2.Parse(experimentText);
 
-        // Act
-        var indexOfDigitNine = experiment.FindDigitNine(segmentsMap);
+        var digitNineSegments = _experiment.FindDigitNine(segmentsMap);
 
-        // Assert
-        indexOfDigitNine.Should().Be(1, $"Because digit nine is made from segments: {DisplayDigit.Create(9)}");
+        digitNineSegments.Should().BeEquivalentTo(Nine.ToCharArray(), $"Because digit nine is made from segments: {DisplayDigit.Create(9)}");
     }
 
-    protected override DisplayExperiment InitializeExperiment(string experiment) => DisplayExperimentV2.Parse(experiment);
+    protected override DisplayExperiment InitializeExperiment(string _experiment) => DisplayExperimentV2.Parse(_experiment);
 }
