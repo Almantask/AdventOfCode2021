@@ -39,10 +39,10 @@ public static class MixedSegmentsDecoder
         var segmentG = experiment.FindSegmentG(knownSegments.Values.ToArray());
         knownSegments['g'] = segmentG;
 
-        var digitZero = experiment.FindDigitZero(knownSegments);
+        var digitZero = experiment.FindDigit(0, knownSegments);
         knownDigits[0] = digitZero;
 
-        var digitNine = experiment.FindDigitNine(knownSegments);
+        var digitNine = experiment.FindDigit(9, knownSegments);
         knownDigits[9] = digitNine;
 
         return knownDigits;

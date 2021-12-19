@@ -3,24 +3,25 @@ using FluentAssertions.Execution;
 
 namespace AdventOfCode.Tests.Day8;
 
-public class DisplayExperimentV2Tests : DisplayExperimentTests
+public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
 {
-    public const string Zero = "cagedb";
-    public const string One = "ab";
-    public const string Two = "gcdfa";
-    public const string Three = "fbcad";
-    public const string Four = "eafb";
-    public const string Five = "cdfbe";
-    public const string Six = "cdfgeb";
-    public const string Seven = "dab";
-    public const string Eight = "acedgfb";
-    public const string Nine = "cefabd";
+    protected abstract string Zero { get; }
+    protected abstract string One { get; }
+    protected abstract string Two { get; }
+    protected abstract string Three { get; }
+    protected abstract string Four { get; }
+    protected abstract string Five { get; }
+    protected abstract string Six { get; }
+    protected abstract string Seven { get; }
+    protected abstract string Eight { get; }
+    protected abstract string Nine { get; }
 
     private readonly DisplayExperimentV2 _experiment;
-    public DisplayExperimentV2Tests()
+
+    protected DisplayExperimentV2Tests()
     {
-        const string standardExperiment = $"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Zero} {One} {One} {Five}";
-        _experiment = DisplayExperimentV2.Parse(standardExperiment);
+        var experimentString = BuildExperimentString();
+        _experiment = DisplayExperimentV2.Parse(experimentString);
     }
 
     [Fact]
@@ -122,43 +123,56 @@ public class DisplayExperimentV2Tests : DisplayExperimentTests
         segmentG.Should().Be('f', "G is the last missing segment");
     }
 
-    [Fact]
-    public void FindDigitZero_ReturnsExpected()
+    // Not very clean, because the values are hardcoded.
+    // However, they cannot be constants because digits come as properties and not constants.
+    // Too much of a hassle to refactor.
+    [Theory]
+    [InlineData(0, "cagedb")]
+    [InlineData(1, "ab")]
+    [InlineData(2, "gcdfa")]
+    [InlineData(3, "fbcad")]
+    [InlineData(4, "eafb")]
+    [InlineData(5, "cdfbe")]
+    [InlineData(6, "cdfgeb")]
+    [InlineData(7, "dab")]
+    [InlineData(8, "acedgfb")]
+    [InlineData(9, "cefabd")]
+    public void FindDigit_ReturnsExpected(int digit, string expectedSegmentsText)
     {
         var segmentsMap = new Dictionary<char, char>()
         {
-            {'a', 'c'},
-            {'b', 'a'},
-            {'c', 'g'},
-            {'d', 'd'},
-            {'e', 'e'},
-            {'f', 'd'},
-            {'g', 'b'},
-        };
-
-        var digitZeroSegments = _experiment.FindDigitZero(segmentsMap);
-
-        digitZeroSegments.Should().BeEquivalentTo(Zero.ToCharArray(), $"Because digit one is made from segments: {DisplayDigit.Create(0)}");
-    }
-
-    [Fact]
-    public void FindDigitNine_ReturnsExpected()
-    {
-        var segmentsMap = new Dictionary<char, char>()
-        {
-            {'a', 'c'},
+            {'a', 'd'},
             {'b', 'e'},
-            {'c', 'f'},
-            {'d', 'a'},
+            {'c', 'a'},
+            {'d', 'f'},
             {'e', 'g'},
-            {'f', 'd'},
-            {'g', 'b'},
+            {'f', 'b'},
+            {'g', 'c'},
         };
 
-        var digitNineSegments = _experiment.FindDigitNine(segmentsMap);
+        var digitZeroSegments = _experiment.FindDigit(digit, segmentsMap);
 
-        digitNineSegments.Should().BeEquivalentTo(Nine.ToCharArray(), $"Because digit nine is made from segments: {DisplayDigit.Create(9)}");
+        digitZeroSegments.Should().BeEquivalentTo(expectedSegmentsText.ToCharArray());
     }
 
-    protected override DisplayExperiment InitializeExperiment(string _experiment) => DisplayExperimentV2.Parse(_experiment);
+    protected abstract string BuildExperimentString();
+    protected override DisplayExperiment InitializeExperiment(string experiment) => DisplayExperimentV2.Parse(experiment);
+
+}
+
+
+public class DisplayExperimentV2Tests1 : DisplayExperimentV2Tests
+{
+    protected override string Zero => "cagedb";
+    protected override string One => "ab";
+    protected override string Two => "gcdfa";
+    protected override string Three => "fbcad";
+    protected override string Four => "eafb";
+    protected override string Five => "cdfbe";
+    protected override string Six => "cdfgeb";
+    protected override string Seven => "dab";
+    protected override string Eight => "acedgfb";
+    protected override string Nine => "cefabd";
+
+    protected override string BuildExperimentString() => $"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Zero} {One} {One} {Five}";
 }

@@ -197,18 +197,11 @@ namespace AdventOfCode.Day8
             return allSegments.Except(knownSegments).First();
         }
 
-        public char[] FindDigitZero(Dictionary<char, char> segmentsMap)
+        public char[] FindDigit(int digit, Dictionary<char, char> segmentsMap)
         {
-            var properDigitZero = DisplayDigit.Create(0);
-            char[] digitZeroAsSignal = MapToSignalSegments(segmentsMap, properDigitZero);
-            return FindDigitAsSignal(digitZeroAsSignal);
-        }
-
-        public char[] FindDigitNine(Dictionary<char, char> segmentsMap)
-        {
-            var properDigitNine = DisplayDigit.Create(9);
-            char[] digitZeroAsSignal = MapToSignalSegments(segmentsMap, properDigitNine);
-            return FindDigitAsSignal(digitZeroAsSignal);
+            var properDigit = DisplayDigit.Create(digit);
+            var digitAsSignal = MapToSignalSegments(segmentsMap, properDigit);
+            return FindDigitAsSignal(digitAsSignal);
         }
 
         private char[] MapToSignalSegments(Dictionary<char, char> segmentsMap, DisplayDigit properDigit)
