@@ -52,8 +52,9 @@ namespace AdventOfCode.Day8
                 var signal = GetSignalPattern(i);
                 var overlap = digitOne.Intersect(signal);
 
-                var isDigitTwoOrDigitFive = overlap.Count() == 1;
-                if (!isDigitTwoOrDigitFive) continue;
+                // Digits two, five and six overlap with digit one at 1 segment.
+                var isDigitTwoOrFiveOrSix = overlap.Count() == 1;
+                if (!isDigitTwoOrFiveOrSix) continue;
 
                 // Digit two overlaps with digit four at 2 segments.
                 var isDigitTwo = digitFour.Intersect(signal).Count() == 2;
@@ -78,10 +79,10 @@ namespace AdventOfCode.Day8
                 var signal = GetSignalPattern(i);
                 var overlap = digitOne.Intersect(signal);
 
-                var isDigitFiveOrDigitSixOrDigitTwo = overlap.Count() == 1;
-                if (!isDigitFiveOrDigitSixOrDigitTwo) continue;
+                var isDigitTwoOrFiveOrSix = overlap.Count() == 1;
+                if (!isDigitTwoOrFiveOrSix) continue;
 
-                // Digit five overlaps with digit four at 3 segments.
+                // Digit five and six overlaps with digit four at 3 segments.
                 var isDigitFiveOrDigitSix = digitFour.Intersect(signal).Count() == 3;
                 if (!isDigitFiveOrDigitSix) continue;
 
@@ -118,20 +119,24 @@ namespace AdventOfCode.Day8
         /// <returns></returns>
         public (char[] digitThreeSegments, char segementD, char segmentB) FindDigitThreeAndSegmentDAndSegmentB(char[] digitOne, char[] digitFour)
         {
-            var digitFourOverlapWithDigitOne = digitOne.Intersect(digitFour).ToArray();
             for (int i = 0; i < SignalsCount; i++)
             {
+                // Digit three overlaps with digit four at 3 segments.
                 var signal = GetSignalPattern(i);
-                var intersection = digitFour.Intersect(signal).ToArray();
+                var digitThreeIntersectionWithDigitFour = digitFour.Intersect(signal).ToArray();
+                var isDigitThree = digitThreeIntersectionWithDigitFour.Count() == 3;
 
-                var isDigitThree = intersection.Count() == 3;
-                isDigitThree = isDigitThree && digitFourOverlapWithDigitOne.All(e => intersection.Contains(e));
+                // All the overlapping points also contains digit one overlaps.
+                // But digit zero is also like that. However, digit zero is 6 segments long, digit three is 5.
+                isDigitThree = isDigitThree &&
+                               digitOne.All(segments => digitThreeIntersectionWithDigitFour.Contains(segments)) &&
+                               signal.Length == 5;
                 if (!isDigitThree) continue;
 
                 var indexOfDigitThree = i;
 
-                var segmentD = intersection
-                    .Except(digitFourOverlapWithDigitOne)
+                var segmentD = digitThreeIntersectionWithDigitFour
+                    .Except(digitOne)
                     .First();
 
                 var segmentB = digitFour
@@ -152,6 +157,8 @@ namespace AdventOfCode.Day8
         #endregion
 
         #region Step 4: Digit five is almost like digit six
+
+        // LAST STEP TROUBLESHOOTING HERE :)
 
         /// <summary>
         /// Digit six overlaps in all segments but 1 with digit five - e.

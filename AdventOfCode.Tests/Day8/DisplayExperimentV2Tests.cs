@@ -5,6 +5,7 @@ namespace AdventOfCode.Tests.Day8;
 
 public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
 {
+    // Within experiment
     protected abstract string Zero { get; }
     protected abstract string One { get; }
     protected abstract string Two { get; }
@@ -15,6 +16,15 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
     protected abstract string Seven { get; }
     protected abstract string Eight { get; }
     protected abstract string Nine { get; }
+
+    // Translated
+    protected abstract char ExpectedSegmentA { get; }
+    protected abstract char ExpectedSegmentB { get; }
+    protected abstract char ExpectedSegmentC { get; }
+    protected abstract char ExpectedSegmentD { get; }
+    protected abstract char ExpectedSegmentE { get; }
+    protected abstract char ExpectedSegmentF { get; }
+    protected abstract char ExpectedSegmentG { get; }
 
     private readonly DisplayExperimentV2 _experiment;
 
@@ -64,19 +74,19 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
         using (new AssertionScope())
         {
             digitTwoSegments.Should().BeEquivalentTo(Two.ToCharArray(), "Digit two overlaps with digit four at 2 segments.");
-            segmentC.Should().Be('a', "Digit two overlaps with digit one at exactly 1 segment");
+            segmentC.Should().Be(ExpectedSegmentC, "Digit two overlaps with digit one at exactly 1 segment");
         }
     }
 
     [Fact]
     public void FindDigitFiveAndSegmentF_ReturnsExpected()
     {
-        var (digitFiveSegments, segmentC) = _experiment.FindDigitFiveAndSegmentF(One.ToCharArray(), Four.ToCharArray());
+        var (digitFiveSegments, segmentF) = _experiment.FindDigitFiveAndSegmentF(One.ToCharArray(), Four.ToCharArray());
 
         using (new AssertionScope())
         {
             digitFiveSegments.Should().BeEquivalentTo(Five.ToCharArray(), "Digit five overlaps with digit four at 3 segments.");
-            segmentC.Should().Be('b', "Digit five overlaps with digit one at exactly 1 segment");
+            segmentF.Should().Be(ExpectedSegmentF, "Digit five overlaps with digit one at exactly 1 segment");
         }
     }
 
@@ -85,7 +95,7 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
     {
         var segmentA = _experiment.FindSegmentA(Seven.ToCharArray(), One.ToCharArray());
 
-        segmentA.Should().Be('d', "Digit seven compared to digit one has 1 extra segment");
+        segmentA.Should().Be(ExpectedSegmentA, "Digit seven compared to digit one has 1 extra segment");
     }
 
     [Fact]
@@ -96,31 +106,31 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
         using (new AssertionScope())
         {
             digitThreeSegments.Should().BeEquivalentTo(Three.ToCharArray(), "Digit four overlaps with digit three at a 1 extra segment");
-            segmentD.Should().Be('f', "Digit four overlaps with digit three at a 1 extra segment");
-            segmentB.Should().Be('e', "Knowing segment d - we're left with the last segment on digit four");
+            segmentD.Should().Be(ExpectedSegmentD, "Digit four overlaps with digit three at a 1 extra segment");
+            segmentB.Should().Be(ExpectedSegmentB, "Knowing segment d - we're left with the last segment on digit four");
         }
     }
 
     [Fact]
     public void FindDigitSixAndSegmentE_ReturnsExpected()
     {
-        var (digitSixSegments, segmentE) = _experiment.FindDigitSixAndSegmentE(Five.ToCharArray(), 'a');
+        var (digitSixSegments, segmentE) = _experiment.FindDigitSixAndSegmentE(Five.ToCharArray(), ExpectedSegmentC);
 
         using (new AssertionScope())
         {
             digitSixSegments.Should().BeEquivalentTo(Six.ToCharArray(), "Digit six overlaps in all segments but 1 with digit five");
-            segmentE.Should().Be('g', "Digit six overlaps in all segments but 1 with digit five");
+            segmentE.Should().Be(ExpectedSegmentE, "Digit six overlaps in all segments but 1 with digit five");
         }
     }
 
     [Fact]
     public void FindSegmentG_ReturnsExpected()
     {
-        var knownSegments = "badcge".ToCharArray();
+        var knownSegments = Eight.ToCharArray().Except(new[] { ExpectedSegmentG }).ToArray();
 
         var segmentG = _experiment.FindSegmentG(knownSegments);
 
-        segmentG.Should().Be('f', "G is the last missing segment");
+        segmentG.Should().Be(ExpectedSegmentG, "G is the last missing segment");
     }
 
     // Not very clean, because the values are hardcoded.
@@ -139,6 +149,9 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
     [InlineData(9, "cefabd")]
     public void FindDigit_ReturnsExpected(int digit, string expectedSegmentsText)
     {
+        const string experimentString = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"; ;
+        var experiment = DisplayExperimentV2.Parse(experimentString);
+
         var segmentsMap = new Dictionary<char, char>()
         {
             {'a', 'd'},
@@ -150,14 +163,13 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
             {'g', 'c'},
         };
 
-        var digitZeroSegments = _experiment.FindDigit(digit, segmentsMap);
+        var digitZeroSegments = experiment.FindDigit(digit, segmentsMap);
 
         digitZeroSegments.Should().BeEquivalentTo(expectedSegmentsText.ToCharArray());
     }
 
-    protected abstract string BuildExperimentString();
     protected override DisplayExperiment InitializeExperiment(string experiment) => DisplayExperimentV2.Parse(experiment);
-
+    private string BuildExperimentString() => $"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Zero} {One} {One} {Five}";
 }
 
 
@@ -174,5 +186,55 @@ public class DisplayExperimentV2Tests1 : DisplayExperimentV2Tests
     protected override string Eight => "acedgfb";
     protected override string Nine => "cefabd";
 
-    protected override string BuildExperimentString() => $"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Zero} {One} {One} {Five}";
+    protected override char ExpectedSegmentA => 'd';
+    protected override char ExpectedSegmentB => 'e';
+    protected override char ExpectedSegmentC => 'a';
+    protected override char ExpectedSegmentD => 'f';
+    protected override char ExpectedSegmentE => 'g';
+    protected override char ExpectedSegmentF => 'b';
+    protected override char ExpectedSegmentG => 'c';
+}
+
+/*
+ *
+  0:      1:      2:      3:      4:
+ aaaa    ....    aaaa    aaaa    ....
+b    c  .    c  .    c  .    c  b    c
+b    c  .    c  .    c  .    c  b    c
+ ....    ....    dddd    dddd    dddd
+e    f  .    f  e    .  .    f  .    f
+e    f  .    f  e    .  .    f  .    f
+ gggg    ....    gggg    gggg    ....
+
+  5:      6:      7:      8:      9:
+ aaaa    aaaa    aaaa    aaaa    aaaa
+b    .  b    .  .    c  b    c  b    c
+b    .  b    .  .    c  b    c  b    c
+ dddd    dddd    ....    dddd    dddd
+.    f  e    f  .    f  e    f  .    f
+.    f  e    f  .    f  e    f  .    f
+ gggg    gggg    ....    gggg    gggg
+ */
+
+public class DisplayExperimentV2Tests2 : DisplayExperimentV2Tests
+{
+    // be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
+    protected override string Zero => "abdefg"; // abcefg = abdefg
+    protected override string One => "be"; // +
+    protected override string Two => "abcdf"; // c = b, f = e.
+    protected override string Three => "bcdef"; // d= c, b = g.
+    protected override string Four => "bceg"; // +
+    protected override string Five => "cdefg"; // +
+    protected override string Six => "acdefg"; // e = a
+    protected override string Seven => "ebd"; // a = d.
+    protected override string Eight => "abcdefg"; // +
+    protected override string Nine => "bcdefg"; // abcdfg = bcdefg
+
+    protected override char ExpectedSegmentA => 'd';
+    protected override char ExpectedSegmentB => 'g';
+    protected override char ExpectedSegmentC => 'b';
+    protected override char ExpectedSegmentD => 'c';
+    protected override char ExpectedSegmentE => 'a';
+    protected override char ExpectedSegmentF => 'e';
+    protected override char ExpectedSegmentG => 'f';
 }
