@@ -24,8 +24,12 @@
 
                 var result = new T[firstDimension, secondDimension];
                 for (var i = 0; i < firstDimension; ++i)
+                {
                     for (var j = 0; j < secondDimension; ++j)
+                    {
                         result[i, j] = source[i][j];
+                    }
+                }
 
                 return result;
             }

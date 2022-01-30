@@ -20,32 +20,6 @@ namespace AdventOfCode.Tests.Day4
         {
             get
             {
-                //var secondBoardSecondRowWinsLast = new object[]
-                //{
-                //    new []
-                //    {
-                //        new Table(new byte[,]
-                //        {
-                //            {1, 2, 3, 4 , 5},
-                //            {6, 7, 8, 9 , 10},
-                //            {11, 12, 13, 14 , 15},
-                //            {16, 17, 18, 19 , 20},
-                //            {21, 22, 23, 24 , 25}
-                //        }),
-                //        new Table(new byte[,]
-                //        {
-                //            {1, 4, 3, 33, 5},
-                //            {6, 7, 8, 9 , 10}, // <- last winner
-                //            {11, 12, 13, 14 , 15},
-                //            {16, 17, 18, 19 , 20},
-                //            {21, 22, 23, 24 , 25}
-                //        })
-                //    },
-                //    new byte[] {1, 2, 3, 4 , 5, 6, 7, 8, 9, 11, 10, 12},
-                //    292 * 10
-                //};
-                //yield return secondBoardSecondRowWinsLast;
-
                 var firstBoardFirstColumnWinsLast = new object[]
                 {
                     new []

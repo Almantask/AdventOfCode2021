@@ -4,12 +4,12 @@ namespace AdventOfCode.Tests.Day6
 {
     public class NaiveLanternFishesTests : LanternfishesTests<Lanternfishes.Naive>
     {
-        protected override Lanternfishes.Naive BuildLanternfishes(int[] internalTimers) => new(internalTimers);
+        protected override Lanternfishes.Naive BuildLanternfishes(params int[] internalTimers) => new(internalTimers);
     }
 
     public class OptimalLanternFishesTests : LanternfishesTests<Lanternfishes.Optimal>
     {
-        protected override Lanternfishes.Optimal BuildLanternfishes(int[] internalTimers) => new(internalTimers);
+        protected override Lanternfishes.Optimal BuildLanternfishes(params int[] internalTimers) => new(internalTimers);
     }
 
     public abstract class LanternfishesTests<TLanternfishes> where TLanternfishes : ILanternfishes
