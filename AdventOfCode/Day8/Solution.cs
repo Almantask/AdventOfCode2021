@@ -9,14 +9,6 @@ namespace AdventOfCode.Day8
 
     public class Part1 : IPartSolution
     {
-        private static readonly DisplayDigit[] _neededDisplayDigits =
-        {
-            DisplayDigit.Create(1),
-            DisplayDigit.Create(4),
-            DisplayDigit.Create(7),
-            DisplayDigit.Create(8)
-        };
-
         public long Solve(string input)
         {
             var experiments = ParseExperiments(input);
