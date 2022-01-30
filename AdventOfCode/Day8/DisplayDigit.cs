@@ -34,7 +34,5 @@
 
             return _displayDigits[digit];
         }
-
-        public override string ToString() => string.Join(string.Empty, Segments);
     }
 }

@@ -79,6 +79,14 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
     }
 
     [Fact]
+    public void FindDigitTwoAndSegmentC_WhenNotFound_ThrowsInvalidOperationException()
+    {
+        Action findDigitTwoAndSegmentCWhenNotFound = () => _experiment.FindDigitTwoAndSegmentC(One.ToCharArray(), One.ToCharArray());
+
+        findDigitTwoAndSegmentCWhenNotFound.Should().Throw<InvalidOperationException>();
+    }
+
+    [Fact]
     public void FindDigitFiveAndSegmentF_ReturnsExpected()
     {
         var (digitFiveSegments, segmentF) = _experiment.FindDigitFiveAndSegmentF(One.ToCharArray(), Four.ToCharArray());
@@ -88,6 +96,14 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
             digitFiveSegments.Should().BeEquivalentTo(Five.ToCharArray(), "Digit five overlaps with digit four at 3 segments.");
             segmentF.Should().Be(ExpectedSegmentF, "Digit five overlaps with digit one at exactly 1 segment");
         }
+    }
+
+    [Fact]
+    public void FindDigitFiveAndSegmentF_WhenNotFound_ThrowsInvalidOperationException()
+    {
+        Action findDigitTwoAndSegmentCWhenNotFound = () => _experiment.FindDigitFiveAndSegmentF(One.ToCharArray(), One.ToCharArray());
+
+        findDigitTwoAndSegmentCWhenNotFound.Should().Throw<InvalidOperationException>();
     }
 
     [Fact]
@@ -112,6 +128,14 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
     }
 
     [Fact]
+    public void FindDigitThreeAndSegmentDAndSegmentB_WhenNotFound_ThrowsInvalidOperationException()
+    {
+        Action findDigitTwoAndSegmentCWhenNotFound = () => _experiment.FindDigitThreeAndSegmentDAndSegmentB(One.ToCharArray(), One.ToCharArray());
+
+        findDigitTwoAndSegmentCWhenNotFound.Should().Throw<InvalidOperationException>();
+    }
+
+    [Fact]
     public void FindDigitSixAndSegmentE_ReturnsExpected()
     {
         var (digitSixSegments, segmentE) = _experiment.FindDigitSixAndSegmentE(Five.ToCharArray(), ExpectedSegmentC);
@@ -121,6 +145,14 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
             digitSixSegments.Should().BeEquivalentTo(Six.ToCharArray(), "Digit six overlaps in all segments but 1 with digit five");
             segmentE.Should().Be(ExpectedSegmentE, "Digit six overlaps in all segments but 1 with digit five");
         }
+    }
+
+    [Fact]
+    public void FindDigitSixAndSegmentE_WhenNotFound_ThrowsInvalidOperationException()
+    {
+        Action findDigitTwoAndSegmentCWhenNotFound = () => _experiment.FindDigitSixAndSegmentE(One.ToCharArray(), 'e');
+
+        findDigitTwoAndSegmentCWhenNotFound.Should().Throw<InvalidOperationException>();
     }
 
     [Fact]
