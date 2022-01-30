@@ -179,7 +179,7 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
     [InlineData(7, "dab")]
     [InlineData(8, "acedgfb")]
     [InlineData(9, "cefabd")]
-    public void FindDigit_ReturnsExpected(int digit, string expectedSegmentsText)
+    public void FindDigit_WhenDigitFound_ReturnsItsSignal(int digit, string expectedSegmentsText)
     {
         const string experimentString = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"; ;
         var experiment = DisplayExperimentV2.Parse(experimentString);
@@ -198,6 +198,50 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
         var digitZeroSegments = experiment.FindDigit(digit, segmentsMap);
 
         digitZeroSegments.Should().BeEquivalentTo(expectedSegmentsText.ToCharArray());
+    }
+
+    [Fact]
+    public void FindDigit_WhenInvalidSegmentsMap_ThrowsInvalidOperationException()
+    {
+        const string experimentString = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"; ;
+        var experiment = DisplayExperimentV2.Parse(experimentString);
+
+        var segmentsMap = new Dictionary<char, char>()
+        {
+            {'a', 'x'},
+            {'b', 'x'},
+            {'c', 'x'},
+            {'d', 'x'},
+            {'e', 'x'},
+            {'f', 'x'},
+            {'g', 'x'},
+        };
+
+        Action findDigitWhenInvalidSegmentsMap = () => experiment.FindDigit(0, segmentsMap);
+
+        findDigitWhenInvalidSegmentsMap.Should().Throw<InvalidOperationException>();
+    }
+
+    [Fact]
+    public void FindDigit_WhenDigitNotFound_ThrowsInvalidOperationException()
+    {
+        const string experimentString = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb cagedb | cdfeb fcadb cdfeb cdbaf"; ;
+        var experiment = DisplayExperimentV2.Parse(experimentString);
+
+        var segmentsMap = new Dictionary<char, char>()
+        {
+            {'a', 'd'},
+            {'b', 'e'},
+            {'c', 'a'},
+            {'d', 'f'},
+            {'e', 'g'},
+            {'f', 'b'},
+            {'g', 'c'},
+        };
+
+        Action findDigitWhenDigitOneDoestNotExist = () => experiment.FindDigit(1, segmentsMap);
+        
+        findDigitWhenDigitOneDoestNotExist.Should().Throw<InvalidOperationException>();
     }
 
     protected override DisplayExperiment InitializeExperiment(string experiment) => DisplayExperimentV2.Parse(experiment);
