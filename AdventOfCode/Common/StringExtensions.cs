@@ -17,9 +17,4 @@ public static class StringExtensions
 
         return numbers;
     }
-
-    public static long BinaryToLong(this string binaryNumber)
-    {
-        return binaryNumber.ToCharArray().ToLong();
-    }
 }

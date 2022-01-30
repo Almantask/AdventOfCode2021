@@ -5,7 +5,7 @@ namespace AdventOfCode.Tests.Common
     public class ArrayExtensions
     {
         [Fact]
-        public void ToJaggedArray_WhenMultidimensionalArrayIsRectangular_ReturnsJaggedArray()
+        public void To2D_WhenMultidimensionalArrayIsRectangular_ReturnsJaggedArray()
         {
             var rectangular2DArray = new[]
             {
@@ -25,7 +25,7 @@ namespace AdventOfCode.Tests.Common
         }
 
         [Fact]
-        public void ToJaggedArray_WhenMultidimensionalArrayIsNotRectangular_ThrowsInvalidOperationException()
+        public void To2D_WhenMultidimensionalArrayIsNotRectangular_ThrowsInvalidOperationException()
         {
             var rectangular2DArray = new[]
             {
@@ -33,7 +33,9 @@ namespace AdventOfCode.Tests.Common
                 new[] { 1 }
             };
 
-            Action toJaggedArrayWhenNotRectangular = () => rectangular2DArray.To2D();
+            Action to2DWhenNotRectangularArray = () => rectangular2DArray.To2D();
+
+            to2DWhenNotRectangularArray.Should().Throw<InvalidOperationException>();
         }
 
         [Fact]

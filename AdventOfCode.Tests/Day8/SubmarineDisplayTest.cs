@@ -21,12 +21,23 @@ namespace AdventOfCode.Tests.Day8
         [InlineData($"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Five} {Six} {Seven} {Eight}", 5678)]
         [InlineData($"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| {Nine} {Nine} {Nine} {Nine}", 9999)]
         [InlineData($"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| ecfbad ecdbaf dcfbae eafbcd", 9999)]
-        public void Output_ReturnsDecoded(string experimentText, int expectedOutput)
+        public void Output_GivenDecodableDisplay_ReturnsDecoded(string experimentText, int expectedOutput)
         {
             var experiment = DisplayExperimentV2.Parse(experimentText);
             var display = new SubmarineDisplay(experiment);
 
             display.Output.Should().Be(expectedOutput);
+        }
+
+        [Fact]
+        public void Output_GivenNonDecodableDisplay_ThrowsInvalidOperationException()
+        {
+            var experimentText = $"{Two} {Three} {Four} {One} {Zero} {Six} {Seven} {Eight} {Five} {Nine}| " +
+                                 $"random digit here is";
+            var experiment = DisplayExperimentV2.Parse(experimentText);
+            Action decodeDigitsNotFromExperiment = () => new SubmarineDisplay(experiment);
+
+            decodeDigitsNotFromExperiment.Should().Throw<InvalidOperationException>();
         }
     }
 }
