@@ -34,7 +34,7 @@ public class Table
 
     private readonly IList<byte> _drawnNumbers;
 
-    private bool _isWinner = false;
+    private bool _isWinner;
 
     public Table(byte[,] board)
     {

@@ -8,17 +8,10 @@ public class LineV2 : LineV1
     {
     }
 
-    public override Point[] ToPoints()
-    {
-        if (Is45DegreesDiagonal())
-        {
-            return ToPointsAlongsideDiagonal();
-        }
-        else
-        {
-            return base.ToPoints();
-        }
-    }
+    public override Point[] ToPoints() 
+        => Is45DegreesDiagonal() 
+            ? ToPointsAlongsideDiagonal() 
+            : base.ToPoints();
 
     public override bool IsValid()
     {
