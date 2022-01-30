@@ -19,7 +19,7 @@ namespace AdventOfCode.Tests.Day8
             {
                 const string standardExperiment = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | acedgfb fcadb cdfeb cdbaf";
                 var experiment1 = DisplayExperimentV2.Parse(standardExperiment);
-                var expectedUntangled1 = new Dictionary<int, char[]>()
+                var expectedUntangled1 = new Dictionary<int, char[]>
                 {
                     {0, new [] { 'c','a','g','e','d','b' } },
                     {1, new [] { 'a','b' } },
@@ -36,7 +36,7 @@ namespace AdventOfCode.Tests.Day8
 
                 const string standardExperiment2 = "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe";
                 var experiment2 = DisplayExperimentV2.Parse(standardExperiment2);
-                var expectedUntangled2 = new Dictionary<int, char[]>()
+                var expectedUntangled2 = new Dictionary<int, char[]>
                 {
                     {0, new [] { 'a', 'b', 'd', 'e', 'f', 'g' } },
                     {1, new [] { 'b', 'e' } },

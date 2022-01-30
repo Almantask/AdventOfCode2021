@@ -16,7 +16,7 @@
 
             DigitsOutput = fourDigitsOutput
                 .Select(pattern => pattern.Trim().ToCharArray())
-                .ToArray(); ;
+                .ToArray();
         }
 
         public char[] GetSignalPattern(int signalPatternIndex)

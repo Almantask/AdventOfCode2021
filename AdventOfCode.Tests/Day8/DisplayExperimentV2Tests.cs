@@ -181,10 +181,10 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
     [InlineData(9, "cefabd")]
     public void FindDigit_WhenDigitFound_ReturnsItsSignal(int digit, string expectedSegmentsText)
     {
-        const string experimentString = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"; ;
+        const string experimentString = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
         var experiment = DisplayExperimentV2.Parse(experimentString);
 
-        var segmentsMap = new Dictionary<char, char>()
+        var segmentsMap = new Dictionary<char, char>
         {
             {'a', 'd'},
             {'b', 'e'},
@@ -225,7 +225,7 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
     [Fact]
     public void FindDigit_WhenDigitNotFound_ThrowsInvalidOperationException()
     {
-        const string experimentString = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb cagedb | cdfeb fcadb cdfeb cdbaf"; ;
+        const string experimentString = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb cagedb | cdfeb fcadb cdfeb cdbaf";
         var experiment = DisplayExperimentV2.Parse(experimentString);
 
         var segmentsMap = new Dictionary<char, char>()
@@ -240,7 +240,7 @@ public abstract class DisplayExperimentV2Tests : DisplayExperimentTests
         };
 
         Action findDigitWhenDigitOneDoestNotExist = () => experiment.FindDigit(1, segmentsMap);
-        
+
         findDigitWhenDigitOneDoestNotExist.Should().Throw<InvalidOperationException>();
     }
 
