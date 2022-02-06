@@ -3,7 +3,7 @@ using AdventOfCode.Common.Day;
 
 namespace AdventOfCode.Day6
 {
-    public class Solution : AdventOfCodeAdventOfCodeDay<Part1, Part2>
+    public class Solution : AdventOfCodeDay<Part1, Part2>
     {
         protected override int Day => 6;
     }

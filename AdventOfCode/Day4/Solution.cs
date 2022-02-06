@@ -4,7 +4,7 @@ using AdventOfCode.Common.Extensions;
 
 namespace AdventOfCode.Day4
 {
-    public class Solution : AdventOfCodeAdventOfCodeDay<Part1, Part2>
+    public class Solution : AdventOfCodeDay<Part1, Part2>
     {
         public const int NoWinnerScore = -1;
 
