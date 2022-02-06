@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using AdventOfCode.Common;
+using AdventOfCode.Common.Extensions;
 
 namespace AdventOfCode.Day8
 {

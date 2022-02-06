@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Common
+﻿namespace AdventOfCode.Common.Day
 {
     public interface IPartSolution
     {

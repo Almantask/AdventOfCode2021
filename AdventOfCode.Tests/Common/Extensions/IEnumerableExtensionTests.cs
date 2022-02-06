@@ -1,6 +1,6 @@
-﻿using AdventOfCode.Common;
+﻿using AdventOfCode.Common.Extensions;
 
-namespace AdventOfCode.Tests.Common
+namespace AdventOfCode.Tests.Common.Extensions
 {
     public class IEnumerableExtensionTests
     {

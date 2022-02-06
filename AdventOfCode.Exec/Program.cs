@@ -1,4 +1,5 @@
 ﻿using AdventOfCode.Common;
+using AdventOfCode.Common.Day;
 
 namespace AdventOfCode.Exec
 {
@@ -16,7 +17,7 @@ namespace AdventOfCode.Exec
             Solve<Day8.Solution>();
         }
 
-        private static void Solve<TAdventOfCodeDay>() where TAdventOfCodeDay : IDaySolution, new()
+        private static void Solve<TAdventOfCodeDay>() where TAdventOfCodeDay : IAdventOfCodeDay, new()
         {
             new TAdventOfCodeDay().Solve();
         }

@@ -1,6 +1,11 @@
-﻿namespace AdventOfCode.Common
+﻿namespace AdventOfCode.Common.Day
 {
-    public abstract class AdventOfCodeDay<TPart1, TPart2> : IDaySolution
+    public interface IAdventOfCodeDay
+    {
+        void Solve();
+    }
+
+    public abstract class AdventOfCodeAdventOfCodeDay<TPart1, TPart2> : IAdventOfCodeDay
         where TPart1 : class, IPartSolution, new()
         where TPart2 : class, IPartSolution, new()
     {

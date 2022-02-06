@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Common
+﻿namespace AdventOfCode.Common.Extensions
 {
     public static class CharArrayExtensions
     {

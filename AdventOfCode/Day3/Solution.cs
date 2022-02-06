@@ -1,8 +1,10 @@
 ﻿using AdventOfCode.Common;
+using AdventOfCode.Common.Day;
+using AdventOfCode.Common.Extensions;
 
 namespace AdventOfCode.Day3
 {
-    public class Solution : AdventOfCodeDay<Part1, Part2>
+    public class Solution : AdventOfCodeAdventOfCodeDay<Part1, Part2>
     {
         protected override int Day => 3;
     }
