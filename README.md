@@ -15,7 +15,7 @@ https://adventofcode.com/2021 solutions
 
 ## Contacts
 
-[![C# Inn](https://badgen.net/discord/members/csharp)](https://discord.gg/rCMKcUU)
+[![C# Inn](https://badgen.net/discord/members/rCMKcUU)](https://discord.gg/rCMKcUU)
 
 [![LinkedInn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/almantas-karpavicius/)
 [![gmail](https://img.shields.io/badge/Gmail-D14836?style=flat&logo=gmail&logoColor=white)](mailto:almantusk@gmail.com)
