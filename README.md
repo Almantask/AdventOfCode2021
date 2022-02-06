@@ -8,7 +8,7 @@
 
 
 [![HitCount](http://hits.dwyl.com/Almantask/AdventOfCode2021.svg)](http://hits.dwyl.com//Almantask/AdventOfCode2021)
-![Commits](https://img.shields.io/github/commits-since/Almantask/AdventOfCode2021.svg)
+[![Commits](https://badgen.net/github/commits/Almantask/AdventOfCode2021)](https://GitHub.com/Almantask/AdventOfCode2021/commit/)
 
 
 https://adventofcode.com/2021 solutions
