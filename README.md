@@ -12,7 +12,7 @@ https://adventofcode.com/2021 solutions
 [![C# Inn](https://badgen.net/discord/members/rCMKcUU)](https://discord.gg/rCMKcUU)
 
 [![LinkedInn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/almantas-karpavicius/)
-[![gmail](https://img.shields.io/badge/Gmail-D14836?style=flat&logo=gmail&logoColor=white)](mailto:almantusk@gmail.com)
-
 [![Reddit](https://img.shields.io/badge/Reddit-FF4500?style=flat&logo=reddit&logoColor=white)](https://www.reddit.com/user/IFriendlyHelper)
 [![Twitter Follow](https://img.shields.io/twitter/follow/Kaisinel2?style=flat&logo=twitter)](https://twitter.com/Kaisinel2)
+
+[![gmail](https://img.shields.io/badge/Gmail-D14836?style=flat&logo=gmail&logoColor=white)](mailto:almantusk@gmail.com)
