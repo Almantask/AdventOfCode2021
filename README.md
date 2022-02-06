@@ -6,7 +6,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ddb6c1f00e6247f4ba8bf43076fb3e11)](https://app.codacy.com/gh/Almantask/AdventOfCode2021?utm_source=github.com&utm_medium=referral&utm_content=Almantask/AdventOfCode2021&utm_campaign=Badge_Grade_Settings)
 
 [![HitCount](http://hits.dwyl.com/Almantask/AdventOfCode2021.svg)](http://hits.dwyl.com//Almantask/AdventOfCode2021)
-![Commits](https://img.shields.io/github/commits-since/Almantask/AdventOfCode2021)
+![Commits](https://img.shields.io/github/commits-since/Almantask/AdventOfCode2021.svg)
 
 https://adventofcode.com/2021 solutions
 
