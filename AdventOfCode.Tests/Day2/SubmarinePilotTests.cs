@@ -18,7 +18,9 @@ namespace AdventOfCode.Tests.Day2
         [Fact]
         public void Move_WhenForward_MovesForward()
         {
-            _pilot.Move("forward 1");
+            const string instructionToMoveForwardBy1 = "forward 1";
+
+            _pilot.Move(instructionToMoveForwardBy1);
 
             _controls.Verify(c => c.Forward(1));
         }
@@ -26,7 +28,9 @@ namespace AdventOfCode.Tests.Day2
         [Fact]
         public void Move_WhenDown_MovesDown()
         {
-            _pilot.Move("down 1");
+            const string instructionToMoveDownBy1 = "down 1";
+
+            _pilot.Move(instructionToMoveDownBy1);
 
             _controls.Verify(c => c.Down(1));
         }
@@ -34,7 +38,9 @@ namespace AdventOfCode.Tests.Day2
         [Fact]
         public void Move_WhenUp_MovesUp()
         {
-            _pilot.Move("up 1");
+            const string instructionToMoveUpBy1 = "up 1";
+
+            _pilot.Move(instructionToMoveUpBy1);
 
             _controls.Verify(c => c.Up(1));
         }

@@ -30,19 +30,25 @@ namespace AdventOfCode.Day6
 
         public long Solve(string input)
         {
+            ILanternfishes lanternFishes = ParseLanternFishes(input); // High level parse
+
+            for (var i = 0; i < DaysToSimulate; i++) // High level solve
+            {
+                lanternFishes.SimulateOneDay();
+            }
+
+            return lanternFishes.Count;
+        }
+
+        private ILanternfishes ParseLanternFishes(string input)
+        {
             var internalTimers = input
                 .Split(',')
                 .Select(n => int.Parse(n))
                 .ToArray();
 
             var lanternFishes = BuildLanternFishes(internalTimers);
-
-            for (var i = 0; i < DaysToSimulate; i++)
-            {
-                lanternFishes.SimulateOneDay();
-            }
-
-            return lanternFishes.Count;
+            return lanternFishes;
         }
 
         protected abstract ILanternfishes BuildLanternFishes(int[] internalTimers);

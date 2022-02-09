@@ -15,6 +15,18 @@ namespace AdventOfCode.Day5
     {
         public long Solve(string input)
         {
+            VentsMap map = ParseVentsMap(input);
+
+            var overlapsOver2Count = map
+                .FindOverlaps()
+                .To1D()
+                .Count(overlap => overlap >= 2);
+
+            return overlapsOver2Count;
+
+        }
+        private VentsMap ParseVentsMap(string input)
+        {
             var lines = input
                 .SplitByEndOfLine()
                 .Select(line => line.Split(" -> "))
@@ -24,13 +36,7 @@ namespace AdventOfCode.Day5
                         ToPoint(pointsInLineString[1]))
                 ).ToArray();
             var map = new VentsMap(lines);
-
-            var overlapsOver2Count = map
-                .FindOverlaps()
-                .To1D()
-                .Count(overlap => overlap >= 2);
-
-            return overlapsOver2Count;
+            return map;
         }
 
         private static Point ToPoint(string commaSeparatedCoordinates)

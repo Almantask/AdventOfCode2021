@@ -15,10 +15,12 @@ namespace AdventOfCode.Tests.Day2
         [Fact]
         public void New_IsAt0DepthAnd0Horizon()
         {
+            var newControl = new SubmarineControlsV2();
+
             using (new AssertionScope())
             {
-                _controlsV2.Depth.Should().Be(0);
-                _controlsV2.Horizon.Should().Be(0);
+                newControl.Depth.Should().Be(0);
+                newControl.Horizon.Should().Be(0);
             }
         }
 
