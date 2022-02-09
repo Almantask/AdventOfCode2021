@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Tests.Common.Extensions
 {
-    public class ArrayExtensions
+    public class ArrayExtensionsTests
     {
         [Fact]
         public void To2D_WhenMultidimensionalArrayIsRectangular_ReturnsJaggedArray()
